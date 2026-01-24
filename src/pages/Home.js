@@ -1,4 +1,5 @@
 import React from 'react';
+import { Box, Container } from '@mui/material';
 import Hero from '../component/Hero';
 import Skills from '../component/Skills';
 import Education from '../component/Education';
@@ -8,14 +9,16 @@ import Contact from '../component/Contact';
 
 const Home = () => {
   return (
-    <>
+    <Box>
       <Hero />
-      <Skills />
-      <Experience />
-      <Education />
-      <Projects />
-      <Contact />
-    </>
+      <Container maxWidth="xl" sx={{ px: { xs: 2, sm: 3, md: 4 } }}>
+        <Skills />
+        <Experience />
+        <Education />
+        <Projects />
+        <Contact />
+      </Container>
+    </Box>
   );
 };
 

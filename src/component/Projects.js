@@ -142,6 +142,7 @@ const Projects = () => {
         mb: 5,
         fontWeight: 700,
         color: '#333',
+        fontSize: { xs: '1.75rem', sm: '2rem', md: '2.5rem' },
         position: 'relative',
         '&::after': {
           content: '""',
@@ -149,7 +150,7 @@ const Projects = () => {
           bottom: -10,
           left: '50%',
           transform: 'translateX(-50%)',
-          width: 80,
+          width: { xs: 60, sm: 80 },
           height: 4,
           background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
           borderRadius: 2,
@@ -161,24 +162,24 @@ const Projects = () => {
   );
 
   return (
-    <Box id="projects" sx={{ py: 10, backgroundColor: 'white' }}>
-      <Container maxWidth="xl">
+    <Box id="projects" sx={{ py: { xs: 6, md: 10 }, backgroundColor: 'white' }}>
+      <Container maxWidth="xl" sx={{ px: { xs: 2, sm: 3, md: 4 } }}>
         <SectionTitle>Projects</SectionTitle>
-        <Grid container spacing={3} justifyContent="center">
+        <Grid container spacing={{ xs: 2, sm: 3, md: 4 }} justifyContent="center">
           {projects.map((project, index) => (
-            <Grid item xs={12} sm={6} md={6} lg={6} key={index} sx={{ maxWidth: '500px' }}>
+            <Grid item xs={12} sm={6} md={6} lg={6} key={index} sx={{ maxWidth: { xs: '100%', sm: '500px' } }}>
               <Card
                 sx={{
                   height: '100%',
                   display: 'flex',
                   flexDirection: 'column',
-                  borderRadius: 3,
-                  boxShadow: 3,
+                  borderRadius: { xs: 2, md: 3 },
+                  boxShadow: { xs: 2, md: 3 },
                   maxWidth: '100%',
                   transition: 'transform 0.3s, boxShadow 0.3s',
                   '&:hover': {
-                    transform: 'translateY(-10px)',
-                    boxShadow: 6,
+                    transform: { xs: 'translateY(-5px)', md: 'translateY(-10px)' },
+                    boxShadow: { xs: 4, md: 6 },
                   },
                 }}
               >
@@ -187,7 +188,7 @@ const Projects = () => {
                   image={project.image}
                   alt={project.title}
                   sx={{
-                    height: 200,
+                    height: { xs: 180, sm: 200, md: 220 },
                     objectFit: 'cover',
                     cursor: 'pointer',
                     '&:hover': {
@@ -196,20 +197,20 @@ const Projects = () => {
                   }}
                   onClick={() => handleViewClick(project)}
                 />
-                <CardContent sx={{ flexGrow: 1 }}>
-                  <Typography variant="h6" component="h3" sx={{ fontWeight: 600, mb: 1 }}>
+                <CardContent sx={{ flexGrow: 1, px: { xs: 2, sm: 3 }, py: { xs: 2, sm: 2.5 } }}>
+                  <Typography variant="h6" component="h3" sx={{ fontWeight: 600, mb: 1, fontSize: { xs: '1.1rem', sm: '1.25rem' } }}>
                     {project.title}
                   </Typography>
                   {project.description && (
-                    <Typography variant="body2" sx={{ color: '#666', mb: 2 }}>
+                    <Typography variant="body2" sx={{ color: '#666', mb: 2, fontSize: { xs: '0.8rem', sm: '0.875rem' }, lineHeight: 1.5 }}>
                       {project.description}
                     </Typography>
                   )}
                   <Box sx={{ mb: 2 }}>
-                    <Typography variant="body2" sx={{ fontWeight: 600, mb: 1 }}>
+                    <Typography variant="body2" sx={{ fontWeight: 600, mb: 1, fontSize: { xs: '0.8rem', sm: '0.875rem' } }}>
                       Skills:
                     </Typography>
-                    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+                    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: { xs: 0.5, sm: 0.75 } }}>
                       {project.skills.map((skill, skillIndex) => (
                         <Chip
                           key={skillIndex}
@@ -219,13 +220,15 @@ const Projects = () => {
                             backgroundColor: '#f0f0f0',
                             color: '#667eea',
                             fontWeight: 500,
+                            fontSize: { xs: '0.7rem', sm: '0.75rem' },
+                            height: { xs: '24px', sm: '28px' },
                           }}
                         />
                       ))}
                     </Box>
                   </Box>
                 </CardContent>
-                <CardActions sx={{ p: 2, pt: 0 }}>
+                <CardActions sx={{ p: { xs: 2, sm: 2.5 }, pt: 0, flexDirection: { xs: 'column', sm: 'row' }, gap: { xs: 1, sm: 0 } }}>
                   {project.githubLink && (
                     <Button
                       size="small"
@@ -233,7 +236,10 @@ const Projects = () => {
                       onClick={() => window.open(project.githubLink, '_blank', 'noopener,noreferrer')}
                       sx={{
                         color: '#667eea',
-                        fontWeight: 600,
+                        fontSize: { xs: '0.8rem', sm: '0.875rem' },
+                        py: { xs: 0.75, sm: 1 },
+                        px: { xs: 1.5, sm: 2 },
+                        minWidth: { xs: '100%', sm: 'auto' },
                         textTransform: 'none',
                         '&:hover': {
                           backgroundColor: 'rgba(102, 126, 234, 0.1)',
@@ -249,6 +255,10 @@ const Projects = () => {
                     onClick={() => handleViewClick(project)}
                     sx={{
                       color: '#667eea',
+                      fontSize: { xs: '0.8rem', sm: '0.875rem' },
+                      py: { xs: 0.75, sm: 1 },
+                      px: { xs: 1.5, sm: 2 },
+                      minWidth: { xs: '100%', sm: 'auto' },
                       fontWeight: 600,
                       textTransform: 'none',
                       '&:hover': {
@@ -269,12 +279,12 @@ const Projects = () => {
       <Dialog
         open={openDialog}
         onClose={handleCloseDialog}
-        maxWidth="lg"
+        maxWidth={{ xs: 'sm', sm: 'md', md: 'lg' }}
         fullWidth
         sx={{
           '& .MuiDialog-paper': {
             backgroundColor: 'transparent',
-            boxShadow: 'none',
+            m: { xs: 1, sm: 2 },
           },
         }}
       >
@@ -286,7 +296,7 @@ const Projects = () => {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            minHeight: '90vh',
+            minHeight: { xs: '70vh', sm: '80vh', md: '90vh' },
           }}
         >
           {/* Close Button */}
@@ -294,8 +304,8 @@ const Projects = () => {
             onClick={handleCloseDialog}
             sx={{
               position: 'absolute',
-              top: 10,
-              right: 10,
+              top: { xs: 5, sm: 10 },
+              right: { xs: 5, sm: 10 },
               zIndex: 10,
               color: 'white',
               backgroundColor: 'rgba(255, 255, 255, 0.1)',
@@ -313,7 +323,7 @@ const Projects = () => {
               onClick={handlePreviousImage}
               sx={{
                 position: 'absolute',
-                left: 10,
+                left: { xs: 5, sm: 10 },
                 zIndex: 10,
                 color: 'white',
                 backgroundColor: 'rgba(255, 255, 255, 0.1)',
@@ -361,7 +371,7 @@ const Projects = () => {
               onClick={handleNextImage}
               sx={{
                 position: 'absolute',
-                right: 10,
+                right: { xs: 5, sm: 10 },
                 zIndex: 10,
                 color: 'white',
                 backgroundColor: 'rgba(255, 255, 255, 0.1)',
@@ -379,14 +389,14 @@ const Projects = () => {
             <Box
               sx={{
                 position: 'absolute',
-                bottom: 20,
+                bottom: { xs: 10, sm: 20 },
                 left: '50%',
                 transform: 'translateX(-50%)',
                 color: 'white',
                 backgroundColor: 'rgba(0, 0, 0, 0.5)',
-                padding: '8px 16px',
+                padding: { xs: '6px 12px', sm: '8px 16px' },
                 borderRadius: 2,
-                fontSize: '0.875rem',
+                fontSize: { xs: '0.75rem', sm: '0.875rem' },
                 fontWeight: 500,
               }}
             >

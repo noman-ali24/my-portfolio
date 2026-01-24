@@ -2,8 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import Header from './component/Header';
-import Footer from './component/Footer';
+import Layout from './component/Layout';
 import Home from './pages/Home';
 import SkillsPage from './pages/SkillsPage';
 import ExperiencePage from './pages/ExperiencePage';
@@ -31,8 +30,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Router>
-        <div className="App">
-          <Header />
+        <Layout>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/skills" element={<SkillsPage />} />
@@ -41,8 +39,7 @@ function App() {
             <Route path="/portfolio" element={<PortfolioPage />} />
             <Route path="/contact" element={<ContactPage />} />
           </Routes>
-          <Footer />
-        </div>
+        </Layout>
       </Router>
     </ThemeProvider>
   );

@@ -1,12 +1,12 @@
 import React from 'react';
-import { Box } from '@mui/material';
+import { Container, Box } from '@mui/material';
 import Skills from '../component/Skills';
 
 const SkillsPage = () => {
   return (
-    <Box sx={{ pt: 10 }}>
+    <Container maxWidth="lg" sx={{ px: { xs: 2, sm: 3, md: 4 }, py: 4 }}>
       <Skills />
-    </Box>
+    </Container>
   );
 };
 

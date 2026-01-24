@@ -44,7 +44,7 @@ const Header = () => {
 
   return (
     <>
-      <AppBar position="fixed" sx={{ backgroundColor: 'white', color: 'black', boxShadow: '0 2px 10px rgba(0,0,0,0.1)' }}>
+      <AppBar position="fixed" sx={{ backgroundColor: 'white', color: 'black', boxShadow: '0 2px 10px rgba(0,0,0,0.1)', zIndex: 1300 }}>
         <Toolbar sx={{ justifyContent: 'space-between', maxWidth: '1200px', width: '100%', mx: 'auto', py: 1 }}>
           <Box 
             component={Link} 
