@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Box } from '@mui/material';
+import { Container } from '@mui/material';
 import Experience from '../component/Experience';
 
 const ExperiencePage = () => {
