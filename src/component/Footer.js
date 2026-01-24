@@ -16,7 +16,7 @@ const Footer = () => {
     >
       <Container maxWidth="lg">
         <Typography variant="body1" sx={{ mb: 1, color: '#ccc' }}>
-          &copy; {currentYear} Your Name. All rights reserved.
+          &copy; {currentYear} Noman Ali. All rights reserved.
         </Typography>
         <Typography variant="body2" sx={{ color: '#ccc' }}>
           Made with <span style={{ color: '#f5576c' }}>❤️</span> using React & Material UI

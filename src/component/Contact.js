@@ -120,7 +120,7 @@ const Contact = () => {
                       Location
                     </Typography>
                     <Typography variant="body2" sx={{ color: '#666' }}>
-                      Your City, Country
+                      Karachi, Pakistan
                     </Typography>
                   </Box>
                 </Box>
