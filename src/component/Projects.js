@@ -178,7 +178,7 @@ const Projects = () => {
                   maxWidth: '100%',
                   transition: 'transform 0.3s, boxShadow 0.3s',
                   '&:hover': {
-                    transform: { xs: 'translateY(-5px)', md: 'translateY(-10px)' },
+                    transform: { xs: 'translateY(-3px)', md: 'translateY(-10px)' },
                     boxShadow: { xs: 4, md: 6 },
                   },
                 }}
@@ -188,7 +188,7 @@ const Projects = () => {
                   image={project.image}
                   alt={project.title}
                   sx={{
-                    height: { xs: 180, sm: 200, md: 220 },
+                    height: { xs: 200, sm: 220, md: 240 },
                     objectFit: 'cover',
                     cursor: 'pointer',
                     '&:hover': {

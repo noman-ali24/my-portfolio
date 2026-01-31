@@ -7,7 +7,7 @@ import WorkIcon from '@mui/icons-material/Work';
 const Experience = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
-  
+
   const experiences = [
     {
       type: 'work',
@@ -76,8 +76,8 @@ const Experience = () => {
             {experiences.map((exp, index) => (
               <TimelineItem key={index}>
                 {index % 2 === 1 && (
-                  <TimelineContent sx={{ 
-                    display: { xs: 'none', md: 'flex' },
+                  <TimelineContent sx={{
+                    display: { xs: 'none', md: 'none' },
                     flex: '0 0 auto',
                     alignItems: 'center',
                     justifyContent: 'flex-end'
@@ -87,7 +87,7 @@ const Experience = () => {
                       sx={{
                         color: '#333',
                         fontWeight: 500,
-                        textAlign: 'right',
+                        textAlign: 'left',
                         pr: 2,
                         fontSize: { xs: '0.8rem', sm: '0.875rem' },
                       }}
@@ -96,7 +96,7 @@ const Experience = () => {
                     </Typography>
                   </TimelineContent>
                 )}
-                <TimelineSeparator>
+                {/* <TimelineSeparator>
                   <TimelineDot
                     sx={{
                       backgroundColor: '#667eea',
@@ -116,28 +116,20 @@ const Experience = () => {
                   {index < experiences.length - 1 && (
                     <TimelineConnector sx={{ backgroundColor: '#667eea', height: { xs: 60, md: 100 } }} />
                   )}
-                </TimelineSeparator>
+                </TimelineSeparator> */}
+                {/* <Box sx={{py:5}}>
+
+                                </Box>  */}
                 {index % 2 === 0 && (
-                  <TimelineContent sx={{ 
+                  <TimelineContent sx={{
                     display: { xs: 'none', md: 'flex' },
                     flex: '0 0 auto',
                     alignItems: 'center'
                   }}>
-                    <Typography
-                      variant="body2"
-                      sx={{
-                        color: '#333',
-                        fontWeight: 500,
-                        textAlign: 'left',
-                        pl: 2,
-                        fontSize: { xs: '0.8rem', sm: '0.875rem' },
-                      }}
-                    >
-                      {exp.period}
-                    </Typography>
+
                   </TimelineContent>
                 )}
-                <TimelineContent sx={{ 
+                <TimelineContent sx={{
                   py: { xs: 1, md: 0 },
                   px: { xs: 1, md: 2 },
                   maxWidth: { xs: 'calc(100vw - 80px)', md: 'none' },
@@ -177,7 +169,7 @@ const Experience = () => {
                   >
                     {/* Mobile date display */}
                     <Box sx={{ display: { xs: 'block', md: 'none' }, mb: 1 }}>
-                      <Typography
+                      {/* <Typography
                         variant="caption"
                         sx={{
                           color: 'rgba(255, 255, 255, 0.8)',
@@ -186,13 +178,13 @@ const Experience = () => {
                         }}
                       >
                         {exp.period}
-                      </Typography>
+                      </Typography> */}
                     </Box>
-                    <Typography 
-                      variant="h5" 
-                      sx={{ 
-                        fontWeight: 700, 
-                        mb: 1, 
+                    <Typography
+                      variant="h5"
+                      sx={{
+                        fontWeight: 700,
+                        mb: 1,
                         textAlign: 'left',
                         fontSize: { xs: '1.1rem', sm: '1.25rem', md: '1.5rem' },
                         lineHeight: 1.2,
@@ -200,16 +192,29 @@ const Experience = () => {
                     >
                       {exp.title}
                     </Typography>
-                    <Typography 
-                      variant="h6" 
-                      sx={{ 
-                        mb: 2, 
-                        opacity: 0.9, 
+                     
+                    <Typography
+                      variant="h6"
+                      sx={{
+                        mb: 2,
+                        opacity: 0.9,
                         textAlign: 'left',
                         fontSize: { xs: '0.95rem', sm: '1rem', md: '1.125rem' },
                       }}
                     >
                       {exp.organization}
+                    </Typography>
+                     <Typography
+                      // variant="body2"
+                      sx={{
+                        color: 'rgba(255, 255, 255, 0.8)',
+                        fontWeight: 500,
+                        textAlign: 'left',
+                        // pl: 2
+                        fontSize: { xs: '0.8rem', sm: '0.875rem' },
+                      }}
+                    >
+                      {exp.period}
                     </Typography>
                     {exp.achievements && (
                       <Box sx={{ mt: 2 }}>
@@ -238,8 +243,9 @@ const Experience = () => {
                   </Paper>
                 </TimelineContent>
               </TimelineItem>
+
             ))}
-          </Timeline>
+           </Timeline>
         </Box>
       </Container>
     </Box>

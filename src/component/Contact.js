@@ -33,9 +33,10 @@ const Contact = () => {
       variant="h4"
       sx={{
         textAlign: 'center',
-        mb: 5,
+        mb: { xs: 3, md: 5 },
         fontWeight: 700,
         color: '#333',
+        fontSize: { xs: '1.75rem', sm: '2rem', md: '2.5rem' },
         position: 'relative',
         '&::after': {
           content: '""',
@@ -43,7 +44,7 @@ const Contact = () => {
           bottom: -10,
           left: '50%',
           transform: 'translateX(-50%)',
-          width: 80,
+          width: { xs: 60, sm: 80 },
           height: 4,
           background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
           borderRadius: 2,
@@ -55,24 +56,24 @@ const Contact = () => {
   );
 
   return (
-    <Box id="contact" sx={{ py: 10, backgroundColor: 'white' }}>
-      <Container maxWidth="lg">
+    <Box id="contact" sx={{ py: { xs: 6, md: 10 }, backgroundColor: 'white', px: { xs: 2, sm: 3, md: 4 } }}>
+      <Container maxWidth="lg" sx={{ px: 0 }}>
         <SectionTitle>Get In Touch</SectionTitle>
-        <Grid container spacing={4}>
+        <Grid container spacing={{ xs: 3, md: 4 }}>
           <Grid item xs={12} md={6}>
             <Box>
-              <Typography variant="h5" sx={{ fontWeight: 600, mb: 2, color: '#333' }}>
+              <Typography variant="h5" sx={{ fontWeight: 600, mb: 2, color: '#333', fontSize: { xs: '1.25rem', md: '1.5rem' } }}>
                 Let's work together!
               </Typography>
-              <Typography variant="body1" sx={{ mb: 4, color: '#666', lineHeight: 1.8 }}>
+              <Typography variant="body1" sx={{ mb: { xs: 3, md: 4 }, color: '#666', lineHeight: 1.8, fontSize: { xs: '0.95rem', md: '1rem' } }}>
                 I'm always open to discussing new projects, creative ideas, or opportunities
                 to be part of your visions. Feel free to reach out to me.
               </Typography>
-              <Box sx={{ mb: 4 }}>
+              <Box sx={{ mb: { xs: 3, md: 4 } }}>
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 3 }}>
-                  <EmailIcon sx={{ color: '#667eea', fontSize: 30 }} />
+                  <EmailIcon sx={{ color: '#667eea', fontSize: { xs: 25, md: 30 } }} />
                   <Box>
-                    <Typography variant="h6" sx={{ fontWeight: 600 }}>
+                    <Typography variant="h6" sx={{ fontWeight: 600, fontSize: { xs: '1rem', md: '1.125rem' } }}>
                       Email
                     </Typography>
                     <Typography 
@@ -82,6 +83,7 @@ const Contact = () => {
                       sx={{ 
                         color: '#666',
                         textDecoration: 'none',
+                        fontSize: { xs: '0.85rem', md: '0.875rem' },
                         '&:hover': {
                           color: '#667eea',
                         }
@@ -92,9 +94,9 @@ const Contact = () => {
                   </Box>
                 </Box>
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 3 }}>
-                  <PhoneIcon sx={{ color: '#667eea', fontSize: 30 }} />
+                  <PhoneIcon sx={{ color: '#667eea', fontSize: { xs: 25, md: 30 } }} />
                   <Box>
-                    <Typography variant="h6" sx={{ fontWeight: 600 }}>
+                    <Typography variant="h6" sx={{ fontWeight: 600, fontSize: { xs: '1rem', md: '1.125rem' } }}>
                       Phone
                     </Typography>
                     <Typography 
@@ -104,6 +106,7 @@ const Contact = () => {
                       sx={{ 
                         color: '#666',
                         textDecoration: 'none',
+                        fontSize: { xs: '0.85rem', md: '0.875rem' },
                         '&:hover': {
                           color: '#667eea',
                         }
@@ -114,12 +117,12 @@ const Contact = () => {
                   </Box>
                 </Box>
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                  <LocationOnIcon sx={{ color: '#667eea', fontSize: 30 }} />
+                  <LocationOnIcon sx={{ color: '#667eea', fontSize: { xs: 25, md: 30 } }} />
                   <Box>
-                    <Typography variant="h6" sx={{ fontWeight: 600 }}>
+                    <Typography variant="h6" sx={{ fontWeight: 600, fontSize: { xs: '1rem', md: '1.125rem' } }}>
                       Location
                     </Typography>
-                    <Typography variant="body2" sx={{ color: '#666' }}>
+                    <Typography variant="body2" sx={{ color: '#666', fontSize: { xs: '0.85rem', md: '0.875rem' } }}>
                       Karachi, Pakistan
                     </Typography>
                   </Box>
@@ -134,6 +137,8 @@ const Contact = () => {
                   sx={{
                     background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
                     color: 'white',
+                    width: { xs: 45, md: 50 },
+                    height: { xs: 45, md: 50 },
                     '&:hover': {
                       transform: 'translateY(-3px)',
                       boxShadow: '0 5px 15px rgba(102, 126, 234, 0.4)',
@@ -150,6 +155,8 @@ const Contact = () => {
                   sx={{
                     background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
                     color: 'white',
+                    width: { xs: 45, md: 50 },
+                    height: { xs: 45, md: 50 },
                     '&:hover': {
                       transform: 'translateY(-3px)',
                       boxShadow: '0 5px 15px rgba(102, 126, 234, 0.4)',
@@ -162,7 +169,7 @@ const Contact = () => {
             </Box>
           </Grid>
           <Grid item xs={12} md={6}>
-            <Paper elevation={3} sx={{ p: 4, borderRadius: 3 }}>
+            <Paper elevation={3} sx={{ p: { xs: 3, md: 4 }, borderRadius: 3 }}>
               <form onSubmit={handleSubmit}>
                 <TextField
                   fullWidth
@@ -173,6 +180,7 @@ const Contact = () => {
                   required
                   sx={{ mb: 3 }}
                   variant="outlined"
+                  size={window.innerWidth < 768 ? 'small' : 'medium'}
                 />
                 <TextField
                   fullWidth
@@ -184,6 +192,7 @@ const Contact = () => {
                   required
                   sx={{ mb: 3 }}
                   variant="outlined"
+                  size={window.innerWidth < 768 ? 'small' : 'medium'}
                 />
                 <TextField
                   fullWidth
@@ -196,6 +205,7 @@ const Contact = () => {
                   rows={6}
                   sx={{ mb: 3 }}
                   variant="outlined"
+                  size={window.innerWidth < 768 ? 'small' : 'medium'}
                 />
                 <Button
                   type="submit"
@@ -204,9 +214,9 @@ const Contact = () => {
                   endIcon={<SendIcon />}
                   sx={{
                     background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                    py: 1.5,
+                    py: { xs: 1.25, md: 1.5 },
                     textTransform: 'none',
-                    fontSize: '1rem',
+                    fontSize: { xs: '0.95rem', md: '1rem' },
                     fontWeight: 600,
                     '&:hover': {
                       background: 'linear-gradient(135deg, #764ba2 0%, #667eea 100%)',
