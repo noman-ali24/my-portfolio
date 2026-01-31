@@ -1,8 +1,6 @@
 import React from 'react';
-import { Container, Typography, Box, Paper, useTheme, useMediaQuery } from '@mui/material';
-import { Timeline, TimelineItem, TimelineSeparator, TimelineConnector, TimelineContent, TimelineDot } from '@mui/lab';
-import SchoolIcon from '@mui/icons-material/School';
-import WorkIcon from '@mui/icons-material/Work';
+import { Container, Typography, Box, Timeline, TimelineItem, TimelineContent } from '@mui/material';
+import { useTheme, useMediaQuery } from '@mui/material';
 
 const Experience = () => {
   const theme = useTheme();

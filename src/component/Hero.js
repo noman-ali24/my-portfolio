@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Box, Typography, Button, IconButton, useMediaQuery, useTheme } from '@mui/material';
+import { Container, Box, Typography, Button, IconButton } from '@mui/material';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import EmailIcon from '@mui/icons-material/Email';
@@ -7,9 +7,6 @@ import PhoneIcon from '@mui/icons-material/Phone';
 import cvFile from '../assets/Noman.Ali.cv.pdf';
 
 const Hero = () => {
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
-  
   const handleDownloadCV = () => {
     const link = document.createElement('a');
     link.href = cvFile;
