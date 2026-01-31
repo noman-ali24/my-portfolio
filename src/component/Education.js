@@ -1,5 +1,6 @@
 import React from 'react';
-import { Container, Typography, Box, Timeline, TimelineItem, TimelineContent } from '@mui/material';
+import { Container, Typography, Box, TimelineItem, TimelineContent } from '@mui/material';
+import { Timeline } from '@mui/lab';
 import { useTheme, useMediaQuery } from '@mui/material';
 
 const Education = () => {
