@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Container, Box, Typography, Button, IconButton, useMediaQuery, useTheme } from '@mui/material';
+import { Container, Box, Typography, Button, IconButton } from '@mui/material';
 
 import GitHubIcon from '@mui/icons-material/GitHub';
 
@@ -15,10 +15,6 @@ import cvFile from '../assets/Noman.Ali.cv.pdf';
 
 
 const Hero = () => {
-
-  const theme = useTheme();
-
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
   
 
