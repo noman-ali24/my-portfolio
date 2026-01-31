@@ -205,13 +205,25 @@ const Experience = () => {
                     <Typography 
                       variant="h6" 
                       sx={{ 
-                        mb: 2, 
+                        mb: 1, 
                         opacity: 0.9, 
                         textAlign: 'left',
                         fontSize: { xs: '0.9rem', sm: '0.95rem', md: '1rem' },
                       }}
                     >
-                      {edu.institution}
+                      {edu.organization}
+                    </Typography>
+                    <Typography 
+                      variant="body2" 
+                      sx={{ 
+                        mb: 2, 
+                        opacity: 0.8, 
+                        textAlign: 'left',
+                        fontSize: { xs: '0.8rem', sm: '0.85rem', md: '0.9rem' },
+                        fontStyle: 'italic',
+                      }}
+                    >
+                      {edu.duration}
                     </Typography>
                     {edu.description && (
                       <Typography 
