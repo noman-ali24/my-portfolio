@@ -1,12 +1,12 @@
 import React from 'react';
-import { Container } from '@mui/material';
+import { Box } from '@mui/material';
 import Contact from '../component/Contact';
 
 const ContactPage = () => {
   return (
-    <Container maxWidth="lg" sx={{ px: { xs: 2, sm: 3, md: 4 }, py: 4 }}>
+    <Box sx={{ width: '100%', overflowX: 'hidden' }}>
       <Contact />
-    </Container>
+    </Box>
   );
 };
 

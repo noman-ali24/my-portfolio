@@ -1,247 +1,221 @@
-
-
 import React from 'react';
-import { Container, Typography, Box, Paper, useTheme, useMediaQuery } from '@mui/material';
-import { Timeline, TimelineItem, TimelineContent } from '@mui/lab';
+import { Container, Typography, Box, Paper, Chip } from '@mui/material';
+import WorkIcon from '@mui/icons-material/Work';
+import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
+import BusinessIcon from '@mui/icons-material/Business';
 
 const Experience = () => {
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
-  
-  const educations = [
-      {
-        type: 'work',
-        title: 'React Native Developer',
-        organization: 'JTechSight',
-        period: '10-November-2025 - 10-January-2026',
-        duration: '2 Months Project-based',
-        description: 'Cross-platform mobile app development with React Native. Added features: Join Table, Activity Tracking, Achievements, Friend Invitations, Chat. Implemented clean UI/UX and modular component structure. Connected app with backend APIs for real-time operations.',
-        // achievements: [
-        //   'Cross-platform (iOS & Android) app built with React Native.',
-        //   'Added features: Join Table, Activity Tracking, Achievements, Friend Invitations, Chat.',
-        //   'Implemented clean UI/UX and modular component structure.',
-        //   'Connected app with backend APIs for real-time operations.',
-        // ],
-      },
-      {
-        type: 'work',
-        title: 'Web & Mobile App Development',
-        organization: 'WGTechsol',
-        period: 'September 2025 - November 2025',
-        duration: 'Internship',
-        description: 'Developed responsive web applications and cross-platform mobile apps. Collaborated with the team to design and implement new features.',
-        // achievements: [
-        //   'Developed responsive web applications using React.js.',
-        //   'Built cross-platform mobile apps using React Native.',
-        //   'Collaborated with the team to design and implement new features.',
-        //   'Debugged and optimized code for performance and scalability.',
-        //   'Gained practical experience with version control (Git/GitHub) and agile workflows.',
-        // ],
-      },
-    ];
-  
+  const experiences = [
+    {
+      title: 'React Native Developer',
+      organization: 'JTechSight',
+      period: '10 Nov 2025 - 10 Jan 2026',
+      duration: '2 Months • Project-based',
+      description: 'Built cross-platform mobile app features with React Native including Join Table, Activity Tracking, Achievements, Friend Invitations, and Chat. Implemented clean UI/UX and modular component structure, integrated with backend APIs for real-time operations.',
+      skills: ['React Native', 'Mobile App Dev', 'API Integration', 'UI/UX Design'],
+    },
+    {
+      title: 'Web & Mobile App Developer',
+      organization: 'WGTechsol',
+      period: 'Sep 2025 - Nov 2025',
+      duration: 'Internship',
+      description: 'Developed responsive web applications and cross-platform mobile apps. Collaborated closely with the team to design and implement new feature sets, debugged code, and optimized application performance.',
+      skills: ['React.js', 'React Native', 'Responsive Web', 'Git / GitHub'],
+    },
+  ];
+
   const SectionTitle = ({ children }) => (
-    <Typography
-      variant="h4"
-      sx={{
-        textAlign: 'center',
-        mb: 5,
-        fontWeight: 700,
-        color: '#333',
-        fontSize: { xs: '1.75rem', sm: '2rem', md: '2.5rem' },
-        position: 'relative',
-        '&::after': {
-          content: '""',
-          position: 'absolute',
-          bottom: -10,
-          left: '50%',
-          transform: 'translateX(-50%)',
-          width: { xs: 60, sm: 80 },
-          height: 4,
-          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-          borderRadius: 2,
-        },
-      }}
-    >
-      {children}
-    </Typography>
+    <Box sx={{ textAlign: 'center', mb: { xs: 4, md: 6 } }}>
+      <Typography
+        variant="h4"
+        sx={{
+          fontWeight: 800,
+          color: '#0f172a',
+          fontSize: { xs: '1.75rem', sm: '2.25rem', md: '2.5rem' },
+          letterSpacing: '-0.02em',
+          mb: 1.5,
+          position: 'relative',
+          display: 'inline-block',
+          '&::after': {
+            content: '""',
+            position: 'absolute',
+            bottom: -8,
+            left: '50%',
+            transform: 'translateX(-50%)',
+            width: 70,
+            height: 4,
+            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+            borderRadius: 2,
+          },
+        }}
+      >
+        {children}
+      </Typography>
+    </Box>
   );
 
   return (
-    <Box id="education" sx={{ py: { xs: 6, md: 10 }, backgroundColor: 'white' }}>
+    <Box id="experience" sx={{ py: { xs: 6, md: 10 }, backgroundColor: 'white' }}>
       <Container maxWidth="lg" sx={{ px: { xs: 2, sm: 3, md: 4 } }}>
-        <SectionTitle>Experience</SectionTitle>
-        <Box sx={{ maxWidth: { xs: '100%', md: 1000 }, mx: 'auto' }}>
-          <Timeline position={isMobile ? 'right' : 'alternate'} sx={{ '& .MuiTimelineItem-missingOppositeContent:before': { flex: 0 } }}>
-            {educations.map((edu, index) => (
-              <TimelineItem key={index}>
-                {index % 2 === 1 && !isMobile && (
-                  <TimelineContent sx={{ 
-                    display: { xs: 'flex', md: 'flex' },
-                    flex: '0 0 auto',
-                    alignItems: 'center',
-                    justifyContent: 'flex-end'
-                  }}>
-                    <Typography
-                      variant="body2"
-                      sx={{
-                        color: '#333',
-                        fontWeight: 500,
-                        textAlign: 'right',
-                        pr: 2,
-                        fontSize: { xs: '0.8rem', sm: '0.875rem' },
-                      }}
-                    >
-                      {edu.period} {edu.status && `(${edu.status})`}
-                    </Typography>
-                  </TimelineContent>
-                )}
-                {/* <TimelineSeparator>
-                  <TimelineDot
-                    sx={{
-                      backgroundColor: '#667eea',
-                      width: { xs: 35, sm: 40, md: 45 },
-                      height: { xs: 35, sm: 40, md: 45 },
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                    }}
-                  >
-                    <SchoolIcon sx={{ color: 'white', fontSize: { xs: 18, sm: 20, md: 22 } }} />
-                  </TimelineDot>
-                  {index < educations.length - 1 && (
-                    <TimelineConnector sx={{ backgroundColor: '#667eea', height: { xs: 50, sm: 60, md: 80 } }} />
-                  )}
-                </TimelineSeparator> */}
-                <Box sx={{py:20}}>
+        <SectionTitle>Work Experience</SectionTitle>
 
-                </Box>
-                {index % 2 === 0 && !isMobile && (
-                  <TimelineContent sx={{ 
-                    display: { xs: 'none', md: 'flex' },
-                    flex: '0 0 auto',
-                    alignItems: 'center'
-                  }}>
-                    <Typography
-                      variant="body2"
-                      sx={{
-                        color: '#333',
-                        fontWeight: 500,
-                        textAlign: 'left',
-                        pl: 2,
-                        fontSize: { xs: '0.8rem', sm: '0.875rem' },
-                      }}
-                    >
-                      {edu.period} {edu.status && `(${edu.status})`}
-                    </Typography>
-                  </TimelineContent>
-                )}
-                <TimelineContent sx={{ 
-                  py: { xs: 1, md: 0 },
-                  px: { xs: 1, md: 2 },
-                  maxWidth: { xs: 'calc(100vw - 60px)', md: 'none' },
-                  minWidth: { xs: 0, md: 'auto' },
-                  flex: { xs: '1', md: 'none' },
-                  ml: { xs: 1, md: 0 },
-                  alignSelf: { xs: 'flex-start', md: 'auto' }
-                }}>
-                  <Paper
-                    elevation={3}
+        <Box
+          sx={{
+            maxWidth: 850,
+            mx: 'auto',
+            position: 'relative',
+            pl: { xs: 2, sm: 4 },
+            '&::before': {
+              content: '""',
+              position: 'absolute',
+              top: 10,
+              bottom: 10,
+              left: { xs: 15, sm: 23 },
+              width: 3,
+              background: 'linear-gradient(180deg, #667eea 0%, #764ba2 100%)',
+              borderRadius: 2,
+            },
+          }}
+        >
+          {experiences.map((item, index) => (
+            <Box
+              key={index}
+              sx={{
+                position: 'relative',
+                mb: { xs: 4, sm: 5 },
+                '&:last-child': { mb: 0 },
+              }}
+            >
+              {/* Timeline Icon Badge */}
+              <Box
+                sx={{
+                  position: 'absolute',
+                  left: { xs: -23, sm: -32 },
+                  top: 0,
+                  width: { xs: 36, sm: 44 },
+                  height: { xs: 36, sm: 44 },
+                  borderRadius: '50%',
+                  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                  color: 'white',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  boxShadow: '0 4px 12px rgba(102, 126, 234, 0.4)',
+                  zIndex: 2,
+                }}
+              >
+                <WorkIcon sx={{ fontSize: { xs: 18, sm: 22 } }} />
+              </Box>
+
+              {/* Experience Content Card */}
+              <Paper
+                elevation={0}
+                sx={{
+                  p: { xs: 2.5, sm: 3.5 },
+                  ml: { xs: 3, sm: 4 },
+                  borderRadius: 3,
+                  backgroundColor: '#f8fafc',
+                  border: '1px solid #e2e8f0',
+                  boxShadow: '0 4px 15px rgba(0,0,0,0.03)',
+                  transition: 'all 0.3s ease',
+                  '&:hover': {
+                    transform: 'translateY(-3px)',
+                    boxShadow: '0 12px 25px rgba(102, 126, 234, 0.12)',
+                    borderColor: '#667eea',
+                  },
+                }}
+              >
+                <Box
+                  sx={{
+                    display: 'flex',
+                    flexDirection: { xs: 'column', sm: 'row' },
+                    justifyContent: 'space-between',
+                    alignItems: { xs: 'flex-start', sm: 'center' },
+                    gap: 1,
+                    mb: 1.5,
+                  }}
+                >
+                  <Typography
+                    variant="h5"
                     sx={{
-                      p: { xs: 2, sm: 2.5, md: 3 },
-                      backgroundColor: '#667eea',
-                      color: 'white',
-                      borderRadius: { xs: 2, md: 3 },
-                      maxWidth: { xs: '100%', sm: 350, md: 400 },
-                      width: { xs: '100%', md: 'auto' },
-                      ml: { xs: 0, md: !isMobile && index % 2 === 0 ? 0 : 'auto' },
-                      mr: { xs: 0, md: !isMobile && index % 2 === 0 ? 'auto' : 0 },
-                      textAlign: 'left',
-                      boxShadow: { xs: 2, md: 3 },
-                      overflow: 'hidden',
-                      wordBreak: 'break-word',
-                      position: 'relative',
-                      '&::before': {
-                        content: '""',
-                        position: 'absolute',
-                        left: isMobile ? -7 : (index % 2 === 0 ? -7 : 'auto'),
-                        right: isMobile ? 'auto' : (index % 2 === 0 ? 'auto' : -7),
-                        top: 20,
-                        width: 0,
-                        height: 0,
-                        borderTop: '7px solid transparent',
-                        borderBottom: '7px solid transparent',
-                        borderRight: isMobile || index % 2 === 0 ? '7px solid #667eea' : 'auto',
-                        borderLeft: !isMobile && index % 2 === 1 ? '7px solid #667eea' : 'auto',
-                        zIndex: 1,
-                      },
+                      fontWeight: 800,
+                      color: '#0f172a',
+                      fontSize: { xs: '1.1rem', sm: '1.3rem' },
                     }}
                   >
-                    {/* Mobile date display */}
-                    <Box sx={{ display: { xs: 'block', md: 'none' }, mb: 1 }}>
-                      <Typography
-                        variant="caption"
-                        sx={{
-                          color: 'rgba(255, 255, 255, 0.8)',
-                          fontSize: '0.75rem',
-                          fontStyle: 'italic',
-                        }}
-                      >
-                        {edu.period} {edu.status && `(${edu.status})`}
-                      </Typography>
-                    </Box>
-                    <Typography 
-                      variant="h5" 
-                      sx={{ 
-                        fontWeight: 700, 
-                        mb: 1, 
-                        textAlign: 'left',
-                        fontSize: { xs: '1rem', sm: '1.1rem', md: '1.3rem' },
-                        lineHeight: 1.2,
+                    {item.title}
+                  </Typography>
+
+                  <Chip
+                    icon={<CalendarTodayIcon sx={{ fontSize: '0.85rem !important', color: '#667eea' }} />}
+                    label={item.period}
+                    size="small"
+                    sx={{
+                      backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                      color: '#667eea',
+                      fontWeight: 700,
+                      fontSize: { xs: '0.75rem', sm: '0.8rem' },
+                      borderRadius: '12px',
+                    }}
+                  />
+                </Box>
+
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 2 }}>
+                  <BusinessIcon sx={{ color: '#764ba2', fontSize: '1.1rem' }} />
+                  <Typography
+                    variant="subtitle1"
+                    sx={{
+                      fontWeight: 700,
+                      color: '#764ba2',
+                      fontSize: { xs: '0.95rem', sm: '1.05rem' },
+                    }}
+                  >
+                    {item.organization}
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      color: '#64748b',
+                      fontSize: '0.85rem',
+                      fontStyle: 'italic',
+                      ml: 1,
+                    }}
+                  >
+                    ({item.duration})
+                  </Typography>
+                </Box>
+
+                <Typography
+                  variant="body1"
+                  sx={{
+                    color: '#334155',
+                    lineHeight: 1.7,
+                    fontSize: { xs: '0.875rem', sm: '0.95rem' },
+                    mb: 2,
+                  }}
+                >
+                  {item.description}
+                </Typography>
+
+                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+                  {item.skills.map((skill, sIdx) => (
+                    <Chip
+                      key={sIdx}
+                      label={skill}
+                      size="small"
+                      sx={{
+                        backgroundColor: 'white',
+                        border: '1px solid #cbd5e1',
+                        color: '#475569',
+                        fontWeight: 600,
+                        fontSize: '0.75rem',
                       }}
-                    >
-                      {edu.title}
-                    </Typography>
-                    <Typography 
-                      variant="h6" 
-                      sx={{ 
-                        mb: 1, 
-                        opacity: 0.9, 
-                        textAlign: 'left',
-                        fontSize: { xs: '0.9rem', sm: '0.95rem', md: '1rem' },
-                      }}
-                    >
-                      {edu.organization}
-                    </Typography>
-                    <Typography 
-                      variant="body2" 
-                      sx={{ 
-                        mb: 2, 
-                        opacity: 0.8, 
-                        textAlign: 'left',
-                        fontSize: { xs: '0.8rem', sm: '0.85rem', md: '0.9rem' },
-                        fontStyle: 'italic',
-                      }}
-                    >
-                      {edu.duration}
-                    </Typography>
-                    {edu.description && (
-                      <Typography 
-                        variant="body2" 
-                        sx={{ 
-                          lineHeight: 1.6, 
-                          textAlign: 'left',
-                          fontSize: { xs: '0.75rem', sm: '0.8rem', md: '0.875rem' },
-                        }}
-                      >
-                        {edu.description}
-                      </Typography>
-                    )}
-                  </Paper>
-                </TimelineContent>
-              </TimelineItem>
-            ))}
-          </Timeline>
+                    />
+                  ))}
+                </Box>
+              </Paper>
+            </Box>
+          ))}
         </Box>
       </Container>
     </Box>

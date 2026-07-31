@@ -10,7 +10,7 @@ const Layout = ({ children }) => {
         display: 'flex',
         flexDirection: 'column',
         minHeight: '100vh',
-        backgroundColor: '#f8f9fa',
+        backgroundColor: '#0f172a',
       }}
     >
       <Header />
@@ -19,15 +19,12 @@ const Layout = ({ children }) => {
         component="main"
         sx={{
           flexGrow: 1,
+          width: '100%',
+          backgroundColor: '#f8fafc',
+          overflowX: 'hidden',
           pt: {
-            xs: '64px',   // mobile header height
-            sm: '70px',
-            md: '80px',   // desktop header height
-          },
-          px: {
-            xs: 1,
-            sm: 2,
-            md: 0,
+            xs: '58px',
+            sm: '64px',
           },
         }}
       >

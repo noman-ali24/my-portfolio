@@ -1,12 +1,12 @@
 import React from 'react';
-import { Container } from '@mui/material';
+import { Box } from '@mui/material';
 import Projects from '../component/Projects';
 
 const PortfolioPage = () => {
   return (
-    <Container maxWidth="xl" sx={{ px: { xs: 2, sm: 3, md: 4 }, py: 4 }}>
+    <Box sx={{ width: '100%', overflowX: 'hidden' }}>
       <Projects />
-    </Container>
+    </Box>
   );
 };
 
