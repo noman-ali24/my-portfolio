@@ -7,12 +7,20 @@ import BusinessIcon from '@mui/icons-material/Business';
 const Experience = () => {
   const experiences = [
     {
-      title: 'React Native Developer',
+      title: 'React Native Full Stack Developer',
+      organization: 'QF Network',
+      period: 'May 2026 - Present',
+      duration: 'Present',
+      description: 'Working as a React Native Full Stack Developer managing both frontend and backend development. Developing intuitive cross-platform mobile applications with React Native and building robust, scalable backend REST APIs using Node.js, Express, and MongoDB.',
+      skills: ['React Native', 'Node.js', 'Express.js', 'MongoDB', 'REST APIs', 'Redux', 'Git & GitHub'],
+    },
+    {
+      title: 'React Native Full Stack Developer',
       organization: 'JTechSight',
       period: '10 Nov 2025 - 10 Jan 2026',
       duration: '2 Months • Project-based',
-      description: 'Built cross-platform mobile app features with React Native including Join Table, Activity Tracking, Achievements, Friend Invitations, and Chat. Implemented clean UI/UX and modular component structure, integrated with backend APIs for real-time operations.',
-      skills: ['React Native', 'Mobile App Dev', 'API Integration', 'UI/UX Design'],
+      description: 'Built cross-platform mobile app features with React Native including Join Table, Activity Tracking, Achievements, Friend Invitations, and Chat. Developed backend services and REST APIs using Node.js, Express.js, and Supabase for real-time data sync and authentication.',
+      skills: ['React Native', 'Node.js', 'Express.js', 'Supabase', 'REST APIs', 'Redux', 'UI/UX Design'],
     },
     {
       title: 'Web & Mobile App Developer',
@@ -20,7 +28,7 @@ const Experience = () => {
       period: 'Sep 2025 - Nov 2025',
       duration: 'Internship',
       description: 'Developed responsive web applications and cross-platform mobile apps. Collaborated closely with the team to design and implement new feature sets, debugged code, and optimized application performance.',
-      skills: ['React.js', 'React Native', 'Responsive Web', 'Git / GitHub'],
+      skills: ['React.js', 'React Native', 'JavaScript', 'Responsive Web', 'Git & GitHub'],
     },
   ];
 
