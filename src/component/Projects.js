@@ -165,209 +165,216 @@ const Projects = () => {
   );
 
   return (
-    <Box id="projects" sx={{ py: { xs: 6, md: 10 }, backgroundColor: 'white' }}>
+    <Box id="projects" sx={{ py: { xs: 5, md: 8 }, backgroundColor: 'white' }}>
       <Container maxWidth="lg" sx={{ px: { xs: 2, sm: 3, md: 4 } }}>
         <SectionTitle>Featured Projects</SectionTitle>
 
-        <Grid container spacing={{ xs: 3, sm: 3, md: 4 }} justifyContent="center" alignItems="stretch">
+        <Box
+          sx={{
+            display: 'grid',
+            gridTemplateColumns: { xs: '1fr', md: 'repeat(2, 1fr)' },
+            gap: { xs: 3, md: 3.5 },
+            maxWidth: '1050px',
+            mx: 'auto',
+          }}
+        >
           {projects.map((project, index) => (
-            <Grid item xs={12} sm={6} md={4} key={index} sx={{ display: 'flex', flexDirection: 'column' }}>
-              <Card
-                elevation={0}
-                sx={{
-                  flex: 1,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  width: '100%',
-                  height: '100%',
-                  borderRadius: 3.5,
-                  backgroundColor: 'white',
-                  border: '1px solid #e2e8f0',
-                  boxShadow: '0 4px 15px rgba(0, 0, 0, 0.03)',
-                  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                  '&:hover': {
-                    transform: 'translateY(-6px)',
-                    boxShadow: '0 16px 30px rgba(102, 126, 234, 0.15)',
-                    borderColor: '#667eea',
-                  },
-                }}
+            <Card
+              key={index}
+              elevation={0}
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                width: '100%',
+                borderRadius: 3,
+                backgroundColor: 'white',
+                border: '1px solid #e2e8f0',
+                boxShadow: '0 3px 12px rgba(0, 0, 0, 0.03)',
+                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                '&:hover': {
+                  transform: 'translateY(-5px)',
+                  boxShadow: '0 12px 24px rgba(102, 126, 234, 0.14)',
+                  borderColor: '#667eea',
+                },
+              }}
+            >
+              {/* Media Image Container */}
+              <Box 
+                sx={{ 
+                  position: 'relative', 
+                  height: { xs: 170, sm: 190 }, 
+                  overflow: 'hidden', 
+                  cursor: 'pointer',
+                  backgroundColor: '#0f172a',
+                  flexShrink: 0,
+                }} 
+                onClick={() => handleViewClick(project)}
               >
-                {/* Media Image Container */}
-                <Box 
-                  sx={{ 
-                    position: 'relative', 
-                    height: 210, 
-                    overflow: 'hidden', 
-                    cursor: 'pointer',
-                    backgroundColor: '#0f172a',
-                    flexShrink: 0,
-                  }} 
-                  onClick={() => handleViewClick(project)}
-                >
-                  <CardMedia
-                    component="img"
-                    image={project.image}
-                    alt={project.title}
+                <CardMedia
+                  component="img"
+                  image={project.image}
+                  alt={project.title}
+                  sx={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    objectPosition: 'top',
+                    transition: 'transform 0.4s ease',
+                    '&:hover': {
+                      transform: 'scale(1.04)',
+                    },
+                  }}
+                />
+                {project.imageType === 'video' && (
+                  <Chip
+                    label="▶ Video Demo"
+                    size="small"
                     sx={{
-                      width: '100%',
-                      height: '100%',
-                      objectFit: 'cover',
-                      objectPosition: 'top',
-                      transition: 'transform 0.5s ease',
-                      '&:hover': {
-                        transform: 'scale(1.05)',
-                      },
+                      position: 'absolute',
+                      top: 10,
+                      right: 10,
+                      backgroundColor: 'rgba(15, 23, 42, 0.85)',
+                      color: 'white',
+                      fontWeight: 700,
+                      fontSize: '0.7rem',
+                      height: '22px',
+                      backdropFilter: 'blur(4px)',
                     }}
                   />
-                  {project.imageType === 'video' && (
-                    <Chip
-                      label="▶ Video Demo"
-                      size="small"
-                      sx={{
-                        position: 'absolute',
-                        top: 12,
-                        right: 12,
-                        backgroundColor: 'rgba(15, 23, 42, 0.85)',
-                        color: 'white',
-                        fontWeight: 700,
-                        fontSize: '0.75rem',
-                        backdropFilter: 'blur(4px)',
-                      }}
-                    />
-                  )}
-                </Box>
+                )}
+              </Box>
 
-                {/* Content Box */}
-                <CardContent 
-                  sx={{ 
-                    flexGrow: 1, 
-                    display: 'flex', 
-                    flexDirection: 'column', 
-                    justifyContent: 'space-between',
-                    p: { xs: 2.5, sm: 3 } 
-                  }}
-                >
-                  <Box>
-                    <Typography
-                      variant="h6"
-                      component="h3"
-                      sx={{
-                        fontWeight: 800,
-                        color: '#0f172a',
-                        mb: 1.5,
-                        fontSize: { xs: '1.05rem', sm: '1.15rem' },
-                        lineHeight: 1.3,
-                        minHeight: 48,
-                        display: 'flex',
-                        alignItems: 'center',
-                      }}
-                    >
-                      {project.title}
-                    </Typography>
-
-                    <Typography
-                      variant="body2"
-                      sx={{
-                        color: '#475569',
-                        mb: 2.5,
-                        fontSize: { xs: '0.85rem', sm: '0.875rem' },
-                        lineHeight: 1.6,
-                        minHeight: 64,
-                        display: '-webkit-box',
-                        WebkitLineClamp: 3,
-                        WebkitBoxOrient: 'vertical',
-                        overflow: 'hidden',
-                      }}
-                    >
-                      {project.description}
-                    </Typography>
-                  </Box>
-
-                  {/* Skills Box */}
-                  <Box 
-                    sx={{ 
-                      display: 'flex', 
-                      flexWrap: 'wrap', 
-                      gap: 0.8,
-                      minHeight: 58,
-                      alignContent: 'flex-start',
-                      mt: 'auto',
+              {/* Content Box */}
+              <CardContent 
+                sx={{ 
+                  flexGrow: 1, 
+                  display: 'flex', 
+                  flexDirection: 'column', 
+                  justifyContent: 'space-between',
+                  p: { xs: 2, sm: 2.5 },
+                  pb: { xs: 1.5, sm: 1.5 },
+                }}
+              >
+                <Box>
+                  <Typography
+                    variant="h6"
+                    component="h3"
+                    sx={{
+                      fontWeight: 700,
+                      color: '#0f172a',
+                      mb: 1,
+                      fontSize: { xs: '1rem', sm: '1.1rem' },
+                      lineHeight: 1.3,
+                      minHeight: { sm: 38 },
+                      display: 'flex',
+                      alignItems: 'center',
                     }}
                   >
-                    {project.skills.map((skill, skillIndex) => (
-                      <Chip
-                        key={skillIndex}
-                        label={skill}
-                        size="small"
-                        sx={{
-                          backgroundColor: 'rgba(102, 126, 234, 0.08)',
-                          color: '#667eea',
-                          fontWeight: 700,
-                          fontSize: '0.72rem',
-                          height: '24px',
-                          borderRadius: '6px',
-                        }}
-                      />
-                    ))}
-                  </Box>
-                </CardContent>
+                    {project.title}
+                  </Typography>
 
-                {/* Action Buttons */}
-                <CardActions sx={{ px: { xs: 2.5, sm: 3 }, pb: { xs: 2.5, sm: 3 }, pt: 0, gap: 1.5 }}>
-                  {project.githubLink && (
-                    <Button
-                      fullWidth
-                      variant="outlined"
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      color: '#475569',
+                      mb: 2,
+                      fontSize: { xs: '0.82rem', sm: '0.86rem' },
+                      lineHeight: 1.55,
+                      minHeight: { sm: 48 },
+                      display: '-webkit-box',
+                      WebkitLineClamp: 2,
+                      WebkitBoxOrient: 'vertical',
+                      overflow: 'hidden',
+                    }}
+                  >
+                    {project.description}
+                  </Typography>
+                </Box>
+
+                {/* Skills Box */}
+                <Box 
+                  sx={{ 
+                    display: 'flex', 
+                    flexWrap: 'wrap', 
+                    gap: 0.6,
+                    minHeight: 46,
+                    alignContent: 'flex-start',
+                    mt: 'auto',
+                  }}
+                >
+                  {project.skills.map((skill, skillIndex) => (
+                    <Chip
+                      key={skillIndex}
+                      label={skill}
                       size="small"
-                      startIcon={<GitHubIcon />}
-                      onClick={() => window.open(project.githubLink, '_blank', 'noopener,noreferrer')}
                       sx={{
-                        borderColor: '#cbd5e1',
-                        color: '#334155',
-                        borderRadius: '8px',
-                        textTransform: 'none',
+                        backgroundColor: 'rgba(102, 126, 234, 0.08)',
+                        color: '#667eea',
                         fontWeight: 600,
-                        fontSize: '0.85rem',
-                        py: 0.8,
-                        '&:hover': {
-                          borderColor: '#667eea',
-                          color: '#667eea',
-                          backgroundColor: 'rgba(102, 126, 234, 0.04)',
-                        },
+                        fontSize: '0.7rem',
+                        height: '22px',
+                        borderRadius: '5px',
                       }}
-                    >
-                      Code
-                    </Button>
-                  )}
+                    />
+                  ))}
+                </Box>
+              </CardContent>
 
+              {/* Action Buttons */}
+              <CardActions sx={{ px: { xs: 2, sm: 2.5 }, pb: { xs: 2, sm: 2.5 }, pt: 0, gap: 1.2 }}>
+                {project.githubLink && (
                   <Button
                     fullWidth
-                    variant="contained"
+                    variant="outlined"
                     size="small"
-                    startIcon={<VisibilityIcon />}
-                    onClick={() => handleViewClick(project)}
+                    startIcon={<GitHubIcon sx={{ fontSize: '1rem !important' }} />}
+                    onClick={() => window.open(project.githubLink, '_blank', 'noopener,noreferrer')}
                     sx={{
-                      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                      color: 'white',
-                      borderRadius: '8px',
+                      borderColor: '#cbd5e1',
+                      color: '#334155',
+                      borderRadius: '7px',
                       textTransform: 'none',
-                      fontWeight: 700,
-                      fontSize: '0.85rem',
-                      py: 0.8,
-                      boxShadow: '0 4px 12px rgba(102, 126, 234, 0.25)',
+                      fontWeight: 600,
+                      fontSize: '0.82rem',
+                      py: 0.65,
                       '&:hover': {
-                        background: 'linear-gradient(135deg, #764ba2 0%, #667eea 100%)',
-                        boxShadow: '0 6px 16px rgba(102, 126, 234, 0.35)',
+                        borderColor: '#667eea',
+                        color: '#667eea',
+                        backgroundColor: 'rgba(102, 126, 234, 0.04)',
                       },
                     }}
                   >
-                    Preview
+                    Code
                   </Button>
-                </CardActions>
-              </Card>
-            </Grid>
+                )}
+
+                <Button
+                  fullWidth
+                  variant="contained"
+                  size="small"
+                  startIcon={<VisibilityIcon sx={{ fontSize: '1rem !important' }} />}
+                  onClick={() => handleViewClick(project)}
+                  sx={{
+                    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                    color: 'white',
+                    borderRadius: '7px',
+                    textTransform: 'none',
+                    fontWeight: 700,
+                    fontSize: '0.82rem',
+                    py: 0.65,
+                    boxShadow: '0 3px 10px rgba(102, 126, 234, 0.22)',
+                    '&:hover': {
+                      background: 'linear-gradient(135deg, #764ba2 0%, #667eea 100%)',
+                      boxShadow: '0 5px 14px rgba(102, 126, 234, 0.3)',
+                    },
+                  }}
+                >
+                  Preview
+                </Button>
+              </CardActions>
+            </Card>
           ))}
-        </Grid>
+        </Box>
       </Container>
 
       {/* Image & Video View Dialog */}

@@ -10,8 +10,8 @@ const Education = () => {
       title: 'Bachelors in Computer Science',
       institution: 'Federal Urdu University of Arts, Sciences & Technology',
       period: '2022 - 2026',
-      status: 'In Progress',
-      description: "Pursuing Bachelor's degree in Computer Science with focus on software engineering, data structures, algorithms, and modern web & mobile technologies.",
+      status: 'Completed',
+      description: "Graduated with Bachelor's degree in Computer Science with focus on software engineering, data structures, algorithms, and modern web & mobile technologies.",
     },
     {
       title: 'Diploma in Computer Information Technology (CIT)',
