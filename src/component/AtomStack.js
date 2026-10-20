@@ -103,7 +103,7 @@ const AtomStack = () => {
       });
 
       // 3. Draw Central Lavender Faceted Nucleus (matches Image 2)
-      const nucleusPulse = prefersReducedMotion ? 0 : Math.sin(currentAngle * 1.35) * 3.4;
+      const nucleusPulse = prefersReducedMotion ? 0 : Math.sin(currentAngle * 0.9) * 1.8;
       const nucleusRadius = 48 + nucleusPulse;
 
       // Outer ambient translucent violet glow
@@ -160,7 +160,7 @@ const AtomStack = () => {
         { u: 0, v: 0 },
       ];
 
-      const rot = currentAngle * 0.12;
+      const rot = currentAngle * 0.18;
       const cosR = Math.cos(rot);
       const sinR = Math.sin(rot);
 
@@ -198,7 +198,7 @@ const AtomStack = () => {
         const orb = ORBIT_ANGLES[electron.orbit];
         const electronAngle = prefersReducedMotion
           ? electron.phase
-          : currentAngle * (electron.speed * 12) + electron.phase;
+          : currentAngle * (electron.speed * 16) + electron.phase;
 
         const ex0 = Math.cos(electronAngle) * orb.radiusX;
         const ey0 = Math.sin(electronAngle) * orb.radiusY;
@@ -293,7 +293,7 @@ const AtomStack = () => {
 
     const render = () => {
       if (isPaused) return;
-      angle += 0.003;
+      angle += 0.0055;
       drawFrame(angle);
       animId = requestAnimationFrame(render);
     };
