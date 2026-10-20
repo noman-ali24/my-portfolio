@@ -1,205 +1,208 @@
 import React from 'react';
-import { Container, Typography, Box, Paper, Chip } from '@mui/material';
+import { Container, Box, Typography, Chip } from '@mui/material';
 import SchoolIcon from '@mui/icons-material/School';
-import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
-import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
+import SectionHeader from './SectionHeader';
 
-const Education = () => {
-  const educations = [
-    {
-      title: 'Bachelors in Computer Science',
-      institution: 'Federal Urdu University of Arts, Sciences & Technology',
-      period: '2022 - 2026',
-      status: 'Completed',
-      description: "Graduated with Bachelor's degree in Computer Science with focus on software engineering, data structures, algorithms, and modern web & mobile technologies.",
-    },
-    {
-      title: 'Diploma in Computer Information Technology (CIT)',
-      institution: 'Sindh Board of Technical Education',
-      period: '2019 - 2021',
-      status: 'Completed',
-      description: 'Completed Diploma in CIT covering fundamentals of computer programming, database management systems, networking, and software engineering.',
-    },
-  ];
+const EDUCATIONS = [
+  {
+    type: 'Completed',
+    status: 'Completed',
+    title: 'Bachelors in Computer Science',
+    institution: 'Federal Urdu University of Arts, Sciences & Technology',
+    period: '2022 - 2026',
+    description:
+      "Graduated with Bachelor's degree in Computer Science focusing on software engineering, data structures, algorithms, and modern web & mobile technologies.",
+    tags: ['Computer Science', 'Software Engineering', 'Data Structures', 'Web & Mobile'],
+  },
+  {
+    type: 'Completed',
+    status: 'Completed',
+    title: 'Diploma in Computer Information Technology (CIT)',
+    institution: 'Sindh Board of Technical Education',
+    period: '2019 - 2021',
+    description:
+      'Completed Diploma in CIT covering fundamentals of computer programming, database management systems, networking, and software engineering.',
+    tags: ['CIT', 'Programming', 'Databases', 'Networking'],
+  },
+];
 
-  const SectionTitle = ({ children }) => (
-    <Box sx={{ textAlign: 'center', mb: { xs: 4, md: 6 } }}>
-      <Typography
-        variant="h4"
-        sx={{
-          fontWeight: 800,
-          color: '#0f172a',
-          fontSize: { xs: '1.75rem', sm: '2.25rem', md: '2.5rem' },
-          letterSpacing: '-0.02em',
-          mb: 1.5,
-          position: 'relative',
-          display: 'inline-block',
-          '&::after': {
-            content: '""',
-            position: 'absolute',
-            bottom: -8,
-            left: '50%',
-            transform: 'translateX(-50%)',
-            width: 70,
-            height: 4,
-            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-            borderRadius: 2,
-          },
-        }}
-      >
-        {children}
-      </Typography>
-    </Box>
-  );
-
+const Education = ({ showHeader = true }) => {
   return (
-    <Box id="education" sx={{ py: { xs: 6, md: 10 }, backgroundColor: '#f8fafc' }}>
-      <Container maxWidth="lg" sx={{ px: { xs: 2, sm: 3, md: 4 } }}>
-        <SectionTitle>Education & Qualifications</SectionTitle>
+    <Box id="education" sx={{ py: { xs: 8, md: 10 }, position: 'relative' }}>
+      <Container maxWidth="lg" sx={{ px: { xs: 2.5, sm: 4, md: 5 } }}>
+        {showHeader && (
+          <SectionHeader
+            eyebrow="ACADEMIC BACKGROUND"
+            title="Education & Credentials"
+            subtitle="Formal technical qualifications in computer science, software engineering, and applied computing."
+          />
+        )}
 
         <Box
           sx={{
-            maxWidth: 850,
-            mx: 'auto',
             position: 'relative',
-            pl: { xs: 2, sm: 4 },
+            maxWidth: 1000,
+            mx: 'auto',
+            mt: 4,
             '&::before': {
               content: '""',
               position: 'absolute',
-              top: 10,
-              bottom: 10,
-              left: { xs: 15, sm: 23 },
-              width: 3,
-              background: 'linear-gradient(180deg, #667eea 0%, #764ba2 100%)',
-              borderRadius: 2,
+              top: 0,
+              bottom: 0,
+              left: { xs: 24, md: '50%' },
+              transform: { xs: 'none', md: 'translateX(-50%)' },
+              width: 2,
+              background: 'linear-gradient(180deg, #22d3ee 0%, #a78bfa 100%)',
+              opacity: 0.7,
             },
           }}
         >
-          {educations.map((item, index) => (
-            <Box
-              key={index}
-              sx={{
-                position: 'relative',
-                mb: { xs: 4, sm: 5 },
-                '&:last-child': { mb: 0 },
-              }}
-            >
-              {/* Timeline Icon Badge */}
+          {EDUCATIONS.map((edu, idx) => {
+            const isEven = idx % 2 === 0;
+            return (
               <Box
+                key={idx}
                 sx={{
-                  position: 'absolute',
-                  left: { xs: -23, sm: -32 },
-                  top: 0,
-                  width: { xs: 36, sm: 44 },
-                  height: { xs: 36, sm: 44 },
-                  borderRadius: '50%',
-                  background: 'linear-gradient(135deg, #764ba2 0%, #667eea 100%)',
-                  color: 'white',
                   display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  boxShadow: '0 4px 12px rgba(118, 75, 162, 0.4)',
-                  zIndex: 2,
+                  flexDirection: { xs: 'column', md: isEven ? 'row' : 'row-reverse' },
+                  alignItems: { xs: 'flex-start', md: 'center' },
+                  mb: { xs: 5, md: 6 },
+                  position: 'relative',
+                  pl: { xs: 7, md: 0 },
                 }}
               >
-                <SchoolIcon sx={{ fontSize: { xs: 18, sm: 22 } }} />
-              </Box>
-
-              {/* Education Content Card */}
-              <Paper
-                elevation={0}
-                sx={{
-                  p: { xs: 2.5, sm: 3.5 },
-                  ml: { xs: 3, sm: 4 },
-                  borderRadius: 3,
-                  backgroundColor: 'white',
-                  border: '1px solid #e2e8f0',
-                  boxShadow: '0 4px 15px rgba(0,0,0,0.03)',
-                  transition: 'all 0.3s ease',
-                  '&:hover': {
-                    transform: 'translateY(-3px)',
-                    boxShadow: '0 12px 25px rgba(118, 75, 162, 0.12)',
-                    borderColor: '#764ba2',
-                  },
-                }}
-              >
+                {/* Timeline Node Badge Icon */}
                 <Box
                   sx={{
+                    position: 'absolute',
+                    left: { xs: 24, md: '50%' },
+                    top: { xs: 0, md: '50%' },
+                    transform: { xs: 'translate(-50%, 0)', md: 'translate(-50%, -50%)' },
+                    width: 40,
+                    height: 40,
+                    borderRadius: '50%',
+                    backgroundColor: '#0a0b1a',
+                    border: '2px solid #a78bfa',
+                    boxShadow: '0 0 15px rgba(167, 139, 250, 0.4)',
                     display: 'flex',
-                    flexDirection: { xs: 'column', sm: 'row' },
-                    justifyContent: 'space-between',
-                    alignItems: { xs: 'flex-start', sm: 'center' },
-                    gap: 1,
-                    mb: 1.5,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: '#a78bfa',
+                    zIndex: 2,
                   }}
                 >
-                  <Typography
-                    variant="h5"
+                  <SchoolIcon sx={{ fontSize: '1.15rem' }} />
+                </Box>
+
+                {/* Card Content */}
+                <Box
+                  sx={{
+                    width: { xs: '100%', md: '44%' },
+                    mr: { md: isEven ? 'auto' : 0 },
+                    ml: { md: !isEven ? 'auto' : 0 },
+                  }}
+                >
+                  <Box
+                    className="glass-panel glass-panel-hover"
                     sx={{
-                      fontWeight: 800,
-                      color: '#0f172a',
-                      fontSize: { xs: '1.1rem', sm: '1.3rem' },
+                      p: { xs: 3, sm: 3.5 },
+                      borderRadius: '20px',
                     }}
                   >
-                    {item.title}
-                  </Typography>
-
-                  <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
-                    {item.status && (
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        mb: 1.5,
+                      }}
+                    >
                       <Chip
-                        label={item.status}
+                        label={edu.status || edu.type}
                         size="small"
                         sx={{
-                          backgroundColor: item.status === 'Completed' ? 'rgba(16, 185, 129, 0.1)' : 'rgba(245, 158, 11, 0.1)',
-                          color: item.status === 'Completed' ? '#059669' : '#d97706',
+                          backgroundColor: 'rgba(34, 197, 94, 0.12)',
+                          color: '#4ade80',
                           fontWeight: 700,
-                          fontSize: { xs: '0.7rem', sm: '0.75rem' },
-                          borderRadius: '12px',
+                          fontSize: '0.72rem',
+                          borderRadius: '9999px',
+                          border: '1px solid rgba(74, 222, 128, 0.3)',
                         }}
                       />
-                    )}
-                    <Chip
-                      icon={<CalendarTodayIcon sx={{ fontSize: '0.85rem !important', color: '#764ba2' }} />}
-                      label={item.period}
-                      size="small"
+                      <Typography
+                        variant="caption"
+                        sx={{
+                          fontFamily: "'JetBrains Mono', monospace",
+                          color: '#94a3b8',
+                          fontSize: '0.75rem',
+                          fontWeight: 500,
+                        }}
+                      >
+                        {edu.period}
+                      </Typography>
+                    </Box>
+
+                    <Typography
+                      variant="h6"
                       sx={{
-                        backgroundColor: 'rgba(118, 75, 162, 0.1)',
-                        color: '#764ba2',
                         fontWeight: 700,
-                        fontSize: { xs: '0.75rem', sm: '0.8rem' },
-                        borderRadius: '12px',
+                        fontSize: { xs: '1.05rem', sm: '1.2rem' },
+                        color: '#ffffff',
+                        lineHeight: 1.3,
+                        mb: 0.5,
                       }}
-                    />
+                    >
+                      {edu.title}
+                    </Typography>
+
+                    <Typography
+                      variant="subtitle2"
+                      sx={{
+                        color: '#22d3ee',
+                        fontWeight: 600,
+                        fontSize: '0.9rem',
+                        mb: 1.5,
+                      }}
+                    >
+                      {edu.institution}
+                    </Typography>
+
+                    <Typography
+                      variant="body2"
+                      sx={{
+                        color: '#94a3b8',
+                        fontSize: '0.86rem',
+                        lineHeight: 1.6,
+                        mb: 2.5,
+                      }}
+                    >
+                      {edu.description}
+                    </Typography>
+
+                    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+                      {edu.tags.map((tag, tIdx) => (
+                        <Box
+                          key={tIdx}
+                          sx={{
+                            px: 1.4,
+                            py: 0.4,
+                            borderRadius: '9999px',
+                            backgroundColor: 'rgba(255, 255, 255, 0.04)',
+                            border: '1px solid rgba(255, 255, 255, 0.08)',
+                            color: '#cbd5e1',
+                            fontSize: '0.74rem',
+                            fontWeight: 500,
+                          }}
+                        >
+                          {tag}
+                        </Box>
+                      ))}
+                    </Box>
                   </Box>
                 </Box>
-
-                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 2 }}>
-                  <AccountBalanceIcon sx={{ color: '#667eea', fontSize: '1.1rem' }} />
-                  <Typography
-                    variant="subtitle1"
-                    sx={{
-                      fontWeight: 700,
-                      color: '#667eea',
-                      fontSize: { xs: '0.95rem', sm: '1.05rem' },
-                    }}
-                  >
-                    {item.institution}
-                  </Typography>
-                </Box>
-
-                <Typography
-                  variant="body1"
-                  sx={{
-                    color: '#334155',
-                    lineHeight: 1.7,
-                    fontSize: { xs: '0.875rem', sm: '0.95rem' },
-                  }}
-                >
-                  {item.description}
-                </Typography>
-              </Paper>
-            </Box>
-          ))}
+              </Box>
+            );
+          })}
         </Box>
       </Container>
     </Box>

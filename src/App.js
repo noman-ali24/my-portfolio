@@ -13,36 +13,37 @@ import './App.css';
 
 const theme = createTheme({
   palette: {
+    mode: 'dark',
     primary: {
-      main: '#667eea',
-      dark: '#5a67d8',
-      light: '#7f9cf5',
+      main: '#22d3ee',
+      light: '#67e8f9',
+      dark: '#0891b2',
     },
     secondary: {
-      main: '#764ba2',
-      dark: '#5b3286',
-      light: '#9f7aea',
+      main: '#6366f1',
+      light: '#818cf8',
+      dark: '#4f46e5',
     },
     background: {
-      default: '#f8fafc',
-      paper: '#ffffff',
+      default: '#05060f',
+      paper: '#0a0b1a',
     },
     text: {
-      primary: '#0f172a',
-      secondary: '#475569',
+      primary: '#f8fafc',
+      secondary: '#94a3b8',
     },
   },
   typography: {
-    fontFamily: '"Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+    fontFamily: "'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
     h1: { fontWeight: 800 },
-    h2: { fontWeight: 700 },
+    h2: { fontWeight: 800 },
     h3: { fontWeight: 700 },
     h4: { fontWeight: 700 },
     h5: { fontWeight: 600 },
     h6: { fontWeight: 600 },
   },
   shape: {
-    borderRadius: 12,
+    borderRadius: 16,
   },
 });
 

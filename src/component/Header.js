@@ -13,7 +13,6 @@ import {
   ListItemIcon,
   ListItemText,
   Avatar,
-  Divider
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
@@ -23,14 +22,12 @@ import WorkIcon from '@mui/icons-material/Work';
 import SchoolIcon from '@mui/icons-material/School';
 import FolderIcon from '@mui/icons-material/Folder';
 import EmailIcon from '@mui/icons-material/Email';
-import { useTheme } from '@mui/material/styles';
-import useMediaQuery from '@mui/material/useMediaQuery';
+import DownloadIcon from '@mui/icons-material/Download';
 import profileImage from '../assets/486203702_1883682939041971_2560599721687666200_n.jpg';
+import cvFile from '../assets/Noman.Ali.cv.pdf';
 
 const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -52,38 +49,78 @@ const Header = () => {
     { label: 'Contact', path: '/contact', icon: <EmailIcon /> },
   ];
 
+  const handleDownloadCV = () => {
+    const link = document.createElement('a');
+    link.href = cvFile;
+    link.download = 'Noman.Ali.cv.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   const drawer = (
-    <Box sx={{ width: 280, display: 'flex', flexDirection: 'column', height: '100%' }}>
+    <Box
+      sx={{
+        width: 290,
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100%',
+        backgroundColor: '#0a0b1a',
+        borderLeft: '1px solid rgba(255, 255, 255, 0.08)',
+        color: '#f8fafc',
+      }}
+    >
       {/* Drawer Top Branding */}
-      <Box sx={{ p: 3, display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', color: 'white' }}>
+      <Box
+        sx={{
+          p: 3,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
+          background: 'linear-gradient(160deg, rgba(17, 18, 40, 0.95), rgba(10, 11, 26, 0.98))',
+        }}
+      >
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
-          <Avatar
-            src={profileImage}
-            alt="Muhammad Noman Ali"
-            sx={{
-              width: 44,
-              height: 44,
-              border: '2px solid white',
-            }}
-          />
+          <Box sx={{ position: 'relative' }}>
+            <Avatar
+              src={profileImage}
+              alt="Muhammad Noman Ali"
+              sx={{
+                width: 44,
+                height: 44,
+                border: '2px solid #22d3ee',
+              }}
+            />
+            <Box
+              sx={{
+                position: 'absolute',
+                bottom: 0,
+                right: 0,
+                width: 10,
+                height: 10,
+                borderRadius: '50%',
+                backgroundColor: '#22c55e',
+                border: '2px solid #05060f',
+              }}
+            />
+          </Box>
           <Box>
-            <Typography variant="subtitle1" sx={{ fontWeight: 700, lineHeight: 1.2 }}>
+            <Typography variant="subtitle1" sx={{ fontWeight: 700, lineHeight: 1.2, color: '#ffffff' }}>
               Noman Ali
             </Typography>
-            <Typography variant="caption" sx={{ opacity: 0.9, fontSize: '0.70rem' }}>
-              Full Stack React Native Developer
+            <Typography variant="caption" sx={{ color: '#94a3b8', fontSize: '0.70rem' }}>
+              React Native Full Stack
             </Typography>
           </Box>
         </Box>
-        <IconButton onClick={handleDrawerToggle} sx={{ color: 'white' }}>
+        <IconButton onClick={handleDrawerToggle} sx={{ color: '#94a3b8', '&:hover': { color: '#ffffff' } }}>
           <CloseIcon />
         </IconButton>
       </Box>
 
-      <Divider />
-
       {/* Drawer Nav Items */}
-      <List sx={{ px: 1.5, py: 2, flexGrow: 1 }}>
+      <List sx={{ px: 2, py: 2.5, flexGrow: 1 }}>
         {navItems.map((item) => {
           const isActive = location.pathname === item.path;
           return (
@@ -91,16 +128,19 @@ const Header = () => {
               key={item.path}
               onClick={() => handleNavigation(item.path)}
               sx={{
-                borderRadius: 2,
+                borderRadius: '12px',
                 mb: 1,
-                backgroundColor: isActive ? 'rgba(102, 126, 234, 0.12)' : 'transparent',
-                color: isActive ? '#667eea' : '#334155',
+                py: 1.2,
+                backgroundColor: isActive ? 'rgba(99, 102, 241, 0.16)' : 'transparent',
+                border: isActive ? '1px solid rgba(99, 102, 241, 0.35)' : '1px solid transparent',
+                color: isActive ? '#22d3ee' : '#cbd5e1',
                 '&:hover': {
-                  backgroundColor: 'rgba(102, 126, 234, 0.08)',
+                  backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                  color: '#ffffff',
                 },
               }}
             >
-              <ListItemIcon sx={{ color: isActive ? '#667eea' : '#64748b', minWidth: 40 }}>
+              <ListItemIcon sx={{ color: isActive ? '#22d3ee' : '#94a3b8', minWidth: 38 }}>
                 {item.icon}
               </ListItemIcon>
               <ListItemText
@@ -115,10 +155,20 @@ const Header = () => {
         })}
       </List>
 
-      <Box sx={{ p: 2, textAlign: 'center', backgroundColor: '#f8fafc', borderTop: '1px solid #e2e8f0' }}>
-        <Typography variant="caption" sx={{ color: '#64748b', fontWeight: 600 }}>
-          React Native Full Stack Developer
-        </Typography>
+      <Box sx={{ p: 2.5, borderTop: '1px solid rgba(255, 255, 255, 0.08)' }}>
+        <Button
+          fullWidth
+          onClick={handleDownloadCV}
+          startIcon={<DownloadIcon />}
+          className="btn-primary-gradient"
+          sx={{
+            py: 1.2,
+            fontSize: '0.88rem',
+            textTransform: 'none',
+          }}
+        >
+          Résumé
+        </Button>
       </Box>
     </Box>
   );
@@ -129,125 +179,174 @@ const Header = () => {
         position="fixed"
         elevation={0}
         sx={{
-          backgroundColor: 'rgba(255, 255, 255, 0.85)',
-          backdropFilter: 'blur(16px)',
-          WebkitBackdropFilter: 'blur(16px)',
-          color: '#0f172a',
-          borderBottom: '1px solid rgba(226, 232, 240, 0.7)',
-          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.02)',
-          zIndex: (theme) => theme.zIndex.drawer - 1, // 1100 so Drawer opens cleanly above AppBar
+          backgroundColor: 'rgba(5, 6, 15, 0.8)',
+          backdropFilter: 'blur(20px)',
+          WebkitBackdropFilter: 'blur(20px)',
+          borderBottom: '1px solid rgba(255, 255, 255, 0.07)',
+          zIndex: 1100,
         }}
       >
-        <Toolbar sx={{ justifyContent: 'space-between', maxWidth: '1200px', width: '100%', mx: 'auto', px: { xs: 1.5, sm: 3 }, minHeight: { xs: 58, sm: 64 } }}>
+        <Toolbar
+          sx={{
+            justifyContent: 'space-between',
+            maxWidth: '1280px',
+            width: '100%',
+            mx: 'auto',
+            px: { xs: 2, sm: 4 },
+            minHeight: { xs: 62, sm: 70 },
+          }}
+        >
+          {/* Left Brand with Avatar */}
           <Box
             component={Link}
             to="/"
             sx={{
               display: 'flex',
               alignItems: 'center',
-              gap: 1.2,
+              gap: 1.5,
               textDecoration: 'none',
-              transition: 'transform 0.2s',
-              '&:hover': {
-                transform: 'scale(1.01)',
-              }
+              transition: 'transform 0.2s ease',
+              '&:hover': { transform: 'scale(1.02)' },
             }}
           >
-            <Avatar
-              src={profileImage}
-              alt="Muhammad Noman Ali"
-              sx={{
-                width: { xs: 38, sm: 46 },
-                height: { xs: 38, sm: 46 },
-                border: '2px solid',
-                borderColor: '#667eea',
-                boxShadow: '0 4px 10px rgba(102, 126, 234, 0.2)'
-              }}
-            />
+            <Box sx={{ position: 'relative' }}>
+              <Avatar
+                src={profileImage}
+                alt="Muhammad Noman Ali"
+                sx={{
+                  width: { xs: 36, sm: 40 },
+                  height: { xs: 36, sm: 40 },
+                  border: '2px solid rgba(99, 102, 241, 0.6)',
+                }}
+              />
+              <Box
+                sx={{
+                  position: 'absolute',
+                  bottom: -1,
+                  right: -1,
+                  width: 9,
+                  height: 9,
+                  borderRadius: '50%',
+                  backgroundColor: '#22c55e',
+                  border: '2px solid #05060f',
+                }}
+              />
+            </Box>
             <Box>
               <Typography
-                variant="h6"
-                component="div"
+                variant="subtitle1"
                 sx={{
                   fontWeight: 800,
-                  fontSize: { xs: '0.85rem', sm: '1.05rem', md: '1.2rem' },
-                  color: '#0f172a',
+                  fontSize: { xs: '0.95rem', sm: '1.05rem' },
+                  color: '#ffffff',
                   lineHeight: 1.2,
-                  letterSpacing: '-0.01em',
-                  whiteSpace: 'nowrap',
                 }}
               >
-                MUHAMMAD NOMAN ALI
+                Noman Ali
               </Typography>
               <Typography
-                variant="body2"
+                variant="caption"
                 sx={{
-                  fontSize: { xs: '0.65rem', sm: '0.75rem', md: '0.825rem' },
-                  color: '#667eea',
-                  fontWeight: 600,
-                  whiteSpace: 'nowrap',
+                  fontFamily: "'JetBrains Mono', monospace",
+                  fontSize: '0.65rem',
+                  color: '#22d3ee',
+                  letterSpacing: '0.04em',
                 }}
               >
-                React Native Full Stack Developer
+                FULL STACK DEV
               </Typography>
             </Box>
           </Box>
-          {isMobile ? (
-            <IconButton
-              onClick={handleDrawerToggle}
-              size="medium"
+
+          {/* Desktop Navigation Links */}
+          <Box
+            sx={{
+              display: { xs: 'none', md: 'flex' },
+              alignItems: 'center',
+              gap: 1,
+              backgroundColor: 'rgba(255, 255, 255, 0.03)',
+              border: '1px solid rgba(255, 255, 255, 0.08)',
+              borderRadius: '9999px',
+              px: 1.5,
+              py: 0.6,
+            }}
+          >
+            {navItems.map((item) => {
+              const isActive = location.pathname === item.path;
+              return (
+                <Button
+                  key={item.path}
+                  component={Link}
+                  to={item.path}
+                  sx={{
+                    px: 2,
+                    py: 0.6,
+                    borderRadius: '9999px',
+                    fontSize: '0.85rem',
+                    fontWeight: isActive ? 700 : 500,
+                    textTransform: 'none',
+                    color: isActive ? '#ffffff' : '#94a3b8',
+                    backgroundColor: isActive ? 'rgba(255, 255, 255, 0.1)' : 'transparent',
+                    border: isActive ? '1px solid rgba(255, 255, 255, 0.15)' : '1px solid transparent',
+                    transition: 'all 0.2s ease',
+                    '&:hover': {
+                      backgroundColor: 'rgba(255, 255, 255, 0.08)',
+                      color: '#ffffff',
+                    },
+                  }}
+                >
+                  {item.label}
+                </Button>
+              );
+            })}
+          </Box>
+
+          {/* Right Action: Résumé Button (Desktop) & Hamburger (Mobile) */}
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+            <Button
+              onClick={handleDownloadCV}
+              className="btn-primary-gradient"
               sx={{
-                backgroundColor: 'rgba(102, 126, 234, 0.08)',
-                color: '#667eea',
-                p: 1,
-                '&:hover': {
-                  backgroundColor: 'rgba(102, 126, 234, 0.15)',
-                }
+                display: { xs: 'none', sm: 'inline-flex' },
+                px: 3,
+                py: 0.8,
+                fontSize: '0.85rem',
+                textTransform: 'none',
               }}
             >
-              <MenuIcon fontSize="medium" />
+              Résumé
+            </Button>
+
+            <IconButton
+              onClick={handleDrawerToggle}
+              aria-label="open drawer"
+              sx={{
+                display: { md: 'none' },
+                color: '#ffffff',
+                backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                border: '1px solid rgba(255, 255, 255, 0.1)',
+                '&:hover': {
+                  backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                },
+              }}
+            >
+              <MenuIcon />
             </IconButton>
-          ) : (
-            <Box sx={{ display: 'flex', gap: 1 }}>
-              {navItems.map((item) => {
-                const isActive = location.pathname === item.path;
-                return (
-                  <Button
-                    key={item.path}
-                    component={Link}
-                    to={item.path}
-                    sx={{
-                      color: isActive ? '#667eea' : '#475569',
-                      backgroundColor: isActive ? 'rgba(102, 126, 234, 0.08)' : 'transparent',
-                      textTransform: 'none',
-                      fontSize: '0.95rem',
-                      fontWeight: isActive ? 700 : 500,
-                      borderRadius: '8px',
-                      px: 2,
-                      py: 0.8,
-                      position: 'relative',
-                      transition: 'all 0.2s',
-                      '&:hover': {
-                        color: '#667eea',
-                        backgroundColor: 'rgba(102, 126, 234, 0.06)',
-                      },
-                    }}
-                  >
-                    {item.label}
-                  </Button>
-                );
-              })}
-            </Box>
-          )}
+          </Box>
         </Toolbar>
       </AppBar>
+
+      {/* Mobile Drawer */}
       <Drawer
-        variant="temporary"
+        anchor="right"
         open={mobileOpen}
         onClose={handleDrawerToggle}
         ModalProps={{ keepMounted: true }}
         PaperProps={{
-          sx: { borderTopRightRadius: 16, borderBottomRightRadius: 16 }
+          sx: {
+            backgroundColor: 'transparent',
+            boxShadow: 'none',
+          },
         }}
       >
         {drawer}

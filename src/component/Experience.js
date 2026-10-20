@@ -1,229 +1,221 @@
 import React from 'react';
-import { Container, Typography, Box, Paper, Chip } from '@mui/material';
+import { Container, Box, Typography, Chip } from '@mui/material';
 import WorkIcon from '@mui/icons-material/Work';
-import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
-import BusinessIcon from '@mui/icons-material/Business';
+import SectionHeader from './SectionHeader';
 
-const Experience = () => {
-  const experiences = [
-    {
-      title: 'React Native Full Stack Developer',
-      organization: 'QF Network',
-      period: 'May 2026 - Present',
-      duration: 'Present',
-      description: 'Working as a React Native Full Stack Developer managing both frontend and backend development. Developing intuitive cross-platform mobile applications with React Native and building robust, scalable backend REST APIs using Node.js, Express, and MongoDB.',
-      skills: ['React Native', 'Node.js', 'Express.js', 'MongoDB', 'REST APIs', 'Redux', 'Git & GitHub'],
-    },
-    {
-      title: 'React Native Full Stack Developer',
-      organization: 'JTechSight',
-      period: '10 Nov 2025 - 10 Jan 2026',
-      duration: '2 Months • Project-based',
-      description: 'Built cross-platform mobile app features with React Native including Join Table, Activity Tracking, Achievements, Friend Invitations, and Chat. Developed backend services and REST APIs using Node.js, Express.js, and Supabase for real-time data sync and authentication.',
-      skills: ['React Native', 'Node.js', 'Express.js', 'Supabase', 'REST APIs', 'Redux', 'UI/UX Design'],
-    },
-    {
-      title: 'Web & Mobile App Developer',
-      organization: 'WGTechsol',
-      period: 'Sep 2025 - Nov 2025',
-      duration: 'Internship',
-      description: 'Developed responsive web applications and cross-platform mobile apps. Collaborated closely with the team to design and implement new feature sets, debugged code, and optimized application performance.',
-      skills: ['React.js', 'React Native', 'JavaScript', 'Responsive Web', 'Git & GitHub'],
-    },
-  ];
+const EXPERIENCES = [
+  {
+    type: 'Work',
+    role: 'React Native Full Stack Developer',
+    company: 'QF Network',
+    period: 'May 2026 - Present',
+    description:
+      'Working as a React Native Full Stack Developer managing both frontend and backend development. Developing intuitive cross-platform mobile applications with React Native and building robust, scalable backend REST APIs using Node.js, Express, and MongoDB.',
+    skills: ['React Native', 'Node.js', 'Express.js', 'MongoDB', 'REST APIs', 'Redux', 'Git & GitHub'],
+  },
+  {
+    type: 'Work',
+    role: 'React Native Full Stack Developer',
+    company: 'JTechSight',
+    period: '10 Nov 2025 - 10 Jan 2026',
+    description:
+      'Built cross-platform mobile app features with React Native including Join Table, Activity Tracking, Achievements, Friend Invitations, and Chat. Developed backend services and REST APIs using Node.js, Express.js, and Supabase for real-time data sync and authentication.',
+    skills: ['React Native', 'Node.js', 'Express.js', 'Supabase', 'REST APIs', 'Redux', 'UI/UX Design'],
+  },
+  {
+    type: 'Work',
+    role: 'Web & Mobile App Developer',
+    company: 'WGTechsol',
+    period: 'Sep 2025 - Nov 2025',
+    description:
+      'Developed responsive web applications and cross-platform mobile apps. Collaborated closely with the team to design and implement new feature sets, debugged code, and optimized application performance.',
+    skills: ['React.js', 'React Native', 'JavaScript', 'Responsive Web', 'Git & GitHub'],
+  },
+];
 
-  const SectionTitle = ({ children }) => (
-    <Box sx={{ textAlign: 'center', mb: { xs: 4, md: 6 } }}>
-      <Typography
-        variant="h4"
-        sx={{
-          fontWeight: 800,
-          color: '#0f172a',
-          fontSize: { xs: '1.75rem', sm: '2.25rem', md: '2.5rem' },
-          letterSpacing: '-0.02em',
-          mb: 1.5,
-          position: 'relative',
-          display: 'inline-block',
-          '&::after': {
-            content: '""',
-            position: 'absolute',
-            bottom: -8,
-            left: '50%',
-            transform: 'translateX(-50%)',
-            width: 70,
-            height: 4,
-            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-            borderRadius: 2,
-          },
-        }}
-      >
-        {children}
-      </Typography>
-    </Box>
-  );
-
+const Experience = ({ showHeader = true }) => {
   return (
-    <Box id="experience" sx={{ py: { xs: 6, md: 10 }, backgroundColor: 'white' }}>
-      <Container maxWidth="lg" sx={{ px: { xs: 2, sm: 3, md: 4 } }}>
-        <SectionTitle>Work Experience</SectionTitle>
+    <Box id="experience" sx={{ py: { xs: 8, md: 12 }, position: 'relative' }}>
+      <Container maxWidth="lg" sx={{ px: { xs: 2.5, sm: 4, md: 5 } }}>
+        {showHeader && (
+          <SectionHeader
+            eyebrow="1 YEAR · BUILDING PRODUCTS"
+            title="Work Experience"
+            subtitle="The path from engineering fundamentals to shipping production apps across mobile and web."
+          />
+        )}
 
+        {/* Central Timeline */}
         <Box
           sx={{
-            maxWidth: 850,
-            mx: 'auto',
             position: 'relative',
-            pl: { xs: 2, sm: 4 },
+            maxWidth: 1000,
+            mx: 'auto',
+            mt: 4,
             '&::before': {
               content: '""',
               position: 'absolute',
-              top: 10,
-              bottom: 10,
-              left: { xs: 15, sm: 23 },
-              width: 3,
-              background: 'linear-gradient(180deg, #667eea 0%, #764ba2 100%)',
-              borderRadius: 2,
+              top: 0,
+              bottom: 0,
+              left: { xs: 24, md: '50%' },
+              transform: { xs: 'none', md: 'translateX(-50%)' },
+              width: 2,
+              background: 'linear-gradient(180deg, #6366f1 0%, #22d3ee 50%, #a78bfa 100%)',
+              opacity: 0.7,
             },
           }}
         >
-          {experiences.map((item, index) => (
-            <Box
-              key={index}
-              sx={{
-                position: 'relative',
-                mb: { xs: 4, sm: 5 },
-                '&:last-child': { mb: 0 },
-              }}
-            >
-              {/* Timeline Icon Badge */}
+          {EXPERIENCES.map((exp, idx) => {
+            const isEven = idx % 2 === 0;
+            return (
               <Box
+                key={idx}
                 sx={{
-                  position: 'absolute',
-                  left: { xs: -23, sm: -32 },
-                  top: 0,
-                  width: { xs: 36, sm: 44 },
-                  height: { xs: 36, sm: 44 },
-                  borderRadius: '50%',
-                  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                  color: 'white',
                   display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  boxShadow: '0 4px 12px rgba(102, 126, 234, 0.4)',
-                  zIndex: 2,
+                  flexDirection: { xs: 'column', md: isEven ? 'row-reverse' : 'row' },
+                  alignItems: { xs: 'flex-start', md: 'center' },
+                  mb: { xs: 5, md: 6 },
+                  position: 'relative',
+                  pl: { xs: 7, md: 0 },
                 }}
               >
-                <WorkIcon sx={{ fontSize: { xs: 18, sm: 22 } }} />
-              </Box>
-
-              {/* Experience Content Card */}
-              <Paper
-                elevation={0}
-                sx={{
-                  p: { xs: 2.5, sm: 3.5 },
-                  ml: { xs: 3, sm: 4 },
-                  borderRadius: 3,
-                  backgroundColor: '#f8fafc',
-                  border: '1px solid #e2e8f0',
-                  boxShadow: '0 4px 15px rgba(0,0,0,0.03)',
-                  transition: 'all 0.3s ease',
-                  '&:hover': {
-                    transform: 'translateY(-3px)',
-                    boxShadow: '0 12px 25px rgba(102, 126, 234, 0.12)',
-                    borderColor: '#667eea',
-                  },
-                }}
-              >
+                {/* Timeline Node Badge Icon */}
                 <Box
                   sx={{
+                    position: 'absolute',
+                    left: { xs: 24, md: '50%' },
+                    top: { xs: 0, md: '50%' },
+                    transform: { xs: 'translate(-50%, 0)', md: 'translate(-50%, -50%)' },
+                    width: 40,
+                    height: 40,
+                    borderRadius: '50%',
+                    backgroundColor: '#0a0b1a',
+                    border: '2px solid #22d3ee',
+                    boxShadow: '0 0 15px rgba(34, 211, 238, 0.4)',
                     display: 'flex',
-                    flexDirection: { xs: 'column', sm: 'row' },
-                    justifyContent: 'space-between',
-                    alignItems: { xs: 'flex-start', sm: 'center' },
-                    gap: 1,
-                    mb: 1.5,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: '#22d3ee',
+                    zIndex: 2,
                   }}
                 >
-                  <Typography
-                    variant="h5"
-                    sx={{
-                      fontWeight: 800,
-                      color: '#0f172a',
-                      fontSize: { xs: '1.1rem', sm: '1.3rem' },
-                    }}
-                  >
-                    {item.title}
-                  </Typography>
-
-                  <Chip
-                    icon={<CalendarTodayIcon sx={{ fontSize: '0.85rem !important', color: '#667eea' }} />}
-                    label={item.period}
-                    size="small"
-                    sx={{
-                      backgroundColor: 'rgba(102, 126, 234, 0.1)',
-                      color: '#667eea',
-                      fontWeight: 700,
-                      fontSize: { xs: '0.75rem', sm: '0.8rem' },
-                      borderRadius: '12px',
-                    }}
-                  />
+                  <WorkIcon sx={{ fontSize: '1.15rem' }} />
                 </Box>
 
-                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 2 }}>
-                  <BusinessIcon sx={{ color: '#764ba2', fontSize: '1.1rem' }} />
-                  <Typography
-                    variant="subtitle1"
-                    sx={{
-                      fontWeight: 700,
-                      color: '#764ba2',
-                      fontSize: { xs: '0.95rem', sm: '1.05rem' },
-                    }}
-                  >
-                    {item.organization}
-                  </Typography>
-                  <Typography
-                    variant="body2"
-                    sx={{
-                      color: '#64748b',
-                      fontSize: '0.85rem',
-                      fontStyle: 'italic',
-                      ml: 1,
-                    }}
-                  >
-                    ({item.duration})
-                  </Typography>
-                </Box>
-
-                <Typography
-                  variant="body1"
+                {/* Card Content (Occupies half width on desktop) */}
+                <Box
                   sx={{
-                    color: '#334155',
-                    lineHeight: 1.7,
-                    fontSize: { xs: '0.875rem', sm: '0.95rem' },
-                    mb: 2,
+                    width: { xs: '100%', md: '44%' },
+                    ml: { md: isEven ? 'auto' : 0 },
+                    mr: { md: !isEven ? 'auto' : 0 },
                   }}
                 >
-                  {item.description}
-                </Typography>
-
-                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
-                  {item.skills.map((skill, sIdx) => (
-                    <Chip
-                      key={sIdx}
-                      label={skill}
-                      size="small"
+                  <Box
+                    className="glass-panel glass-panel-hover"
+                    sx={{
+                      p: { xs: 3, sm: 3.5 },
+                      borderRadius: '20px',
+                    }}
+                  >
+                    {/* Top Row: Type Pill & Period */}
+                    <Box
                       sx={{
-                        backgroundColor: 'white',
-                        border: '1px solid #cbd5e1',
-                        color: '#475569',
-                        fontWeight: 600,
-                        fontSize: '0.75rem',
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        mb: 1.5,
                       }}
-                    />
-                  ))}
+                    >
+                      <Chip
+                        label={exp.type}
+                        size="small"
+                        sx={{
+                          backgroundColor: 'rgba(99, 102, 241, 0.15)',
+                          color: '#818cf8',
+                          fontWeight: 700,
+                          fontSize: '0.72rem',
+                          borderRadius: '9999px',
+                          border: '1px solid rgba(99, 102, 241, 0.3)',
+                        }}
+                      />
+                      <Typography
+                        variant="caption"
+                        sx={{
+                          fontFamily: "'JetBrains Mono', monospace",
+                          color: '#94a3b8',
+                          fontSize: '0.75rem',
+                          fontWeight: 500,
+                        }}
+                      >
+                        {exp.period}
+                      </Typography>
+                    </Box>
+
+                    {/* Role Title */}
+                    <Typography
+                      variant="h6"
+                      sx={{
+                        fontWeight: 700,
+                        fontSize: { xs: '1.05rem', sm: '1.2rem' },
+                        color: '#ffffff',
+                        lineHeight: 1.3,
+                        mb: 0.5,
+                      }}
+                    >
+                      {exp.role}
+                    </Typography>
+
+                    {/* Company */}
+                    <Typography
+                      variant="subtitle2"
+                      sx={{
+                        color: '#22d3ee',
+                        fontWeight: 600,
+                        fontSize: '0.9rem',
+                        mb: 1.5,
+                      }}
+                    >
+                      {exp.company}
+                    </Typography>
+
+                    {/* Description */}
+                    <Typography
+                      variant="body2"
+                      sx={{
+                        color: '#94a3b8',
+                        fontSize: '0.86rem',
+                        lineHeight: 1.6,
+                        mb: 2.5,
+                      }}
+                    >
+                      {exp.description}
+                    </Typography>
+
+                    {/* Skills Badges */}
+                    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+                      {exp.skills.map((skill, sIdx) => (
+                        <Box
+                          key={sIdx}
+                          sx={{
+                            px: 1.4,
+                            py: 0.4,
+                            borderRadius: '9999px',
+                            backgroundColor: 'rgba(255, 255, 255, 0.04)',
+                            border: '1px solid rgba(255, 255, 255, 0.08)',
+                            color: '#cbd5e1',
+                            fontSize: '0.74rem',
+                            fontWeight: 500,
+                          }}
+                        >
+                          {skill}
+                        </Box>
+                      ))}
+                    </Box>
+                  </Box>
                 </Box>
-              </Paper>
-            </Box>
-          ))}
+              </Box>
+            );
+          })}
         </Box>
       </Container>
     </Box>

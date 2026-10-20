@@ -4,11 +4,13 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import EmailIcon from '@mui/icons-material/Email';
+import PhoneIcon from '@mui/icons-material/Phone';
+import { Link } from 'react-router-dom';
 
 function ScrollToTopFab() {
   const trigger = useScrollTrigger({
     disableHysteresis: true,
-    threshold: 200,
+    threshold: 250,
   });
 
   const handleClick = () => {
@@ -24,17 +26,14 @@ function ScrollToTopFab() {
         size="small"
         onClick={handleClick}
         aria-label="scroll back to top"
+        className="btn-primary-gradient"
         sx={{
           position: 'fixed',
           bottom: 24,
           right: 24,
           zIndex: 1000,
-          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-          color: 'white',
-          boxShadow: '0 6px 20px rgba(102, 126, 234, 0.4)',
-          '&:hover': {
-            background: 'linear-gradient(135deg, #764ba2 0%, #667eea 100%)',
-          },
+          width: 44,
+          height: 44,
         }}
       >
         <KeyboardArrowUpIcon />
@@ -46,139 +45,177 @@ function ScrollToTopFab() {
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
+  const navLinks = [
+    { label: 'Home', path: '/' },
+    { label: 'Skills', path: '/skills' },
+    { label: 'Experience', path: '/experience' },
+    { label: 'Education', path: '/education' },
+    { label: 'Portfolio', path: '/portfolio' },
+    { label: 'Contact', path: '/contact' },
+  ];
+
   return (
     <Box
       component="footer"
       sx={{
-        background: 'linear-gradient(180deg, #0f172a 0%, #090d16 100%)',
-        color: '#f8fafc',
-        pt: { xs: 5, sm: 6 },
-        pb: { xs: 6, sm: 5 },
-        px: { xs: 2.5, sm: 4 },
-        width: '100%',
+        backgroundColor: '#05060f',
+        borderTop: '1px solid rgba(255, 255, 255, 0.08)',
+        pt: { xs: 6, md: 8 },
+        pb: 5,
         position: 'relative',
         zIndex: 10,
-        borderTop: '1px solid rgba(255, 255, 255, 0.1)',
       }}
     >
-      <Container maxWidth="lg">
+      <Container maxWidth="lg" sx={{ px: { xs: 2.5, sm: 4, md: 5 } }}>
         <Box
           sx={{
             display: 'flex',
-            flexDirection: { xs: 'column', sm: 'row' },
+            flexDirection: { xs: 'column', md: 'row' },
             justifyContent: 'space-between',
-            alignItems: 'center',
-            gap: 2.5,
-            mb: 3.5,
+            alignItems: { xs: 'flex-start', md: 'center' },
+            gap: 4,
+            pb: 5,
+            borderBottom: '1px solid rgba(255, 255, 255, 0.06)',
           }}
         >
-          <Box sx={{ textAlign: { xs: 'center', sm: 'left' } }}>
-            <Typography 
-              variant="h6" 
-              sx={{ 
-                fontWeight: 800, 
-                color: '#ffffff', 
-                fontSize: { xs: '1.1rem', sm: '1.25rem' },
-                letterSpacing: '-0.01em',
+          {/* Brand */}
+          <Box>
+            <Typography
+              variant="h5"
+              sx={{
+                fontWeight: 900,
+                color: '#ffffff',
+                letterSpacing: '-0.02em',
+                mb: 0.5,
               }}
             >
-              MUHAMMAD NOMAN ALI
+              Noman <span className="gradient-text">Ali</span>
             </Typography>
-            <Typography 
-              variant="body2" 
-              sx={{ 
-                color: '#a5b4fc', 
-                fontWeight: 600, 
-                fontSize: { xs: '0.85rem', sm: '0.9rem' },
-                mt: 0.3,
+            <Typography
+              variant="caption"
+              sx={{
+                fontFamily: "'JetBrains Mono', monospace",
+                color: '#94a3b8',
+                fontSize: '0.78rem',
               }}
             >
               React Native Full Stack Developer
             </Typography>
           </Box>
 
-          <Box sx={{ display: 'flex', gap: 1.5, justifyContent: 'center' }}>
-            <IconButton
-              component="a"
-              href="mailto:nomanali01241@gmail.com"
-              aria-label="Email"
-              sx={{ 
-                color: '#ffffff', 
-                backgroundColor: 'rgba(255, 255, 255, 0.08)',
-                border: '1px solid rgba(255, 255, 255, 0.12)',
-                p: 1.2,
-                transition: 'all 0.3s ease',
-                '&:hover': { 
-                  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                  transform: 'translateY(-3px)',
-                  boxShadow: '0 6px 16px rgba(102, 126, 234, 0.4)',
-                } 
-              }}
-            >
-              <EmailIcon fontSize="small" />
-            </IconButton>
-            <IconButton
-              component="a"
-              href="https://github.com/noman-ali24"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="GitHub"
-              sx={{ 
-                color: '#ffffff', 
-                backgroundColor: 'rgba(255, 255, 255, 0.08)',
-                border: '1px solid rgba(255, 255, 255, 0.12)',
-                p: 1.2,
-                transition: 'all 0.3s ease',
-                '&:hover': { 
-                  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                  transform: 'translateY(-3px)',
-                  boxShadow: '0 6px 16px rgba(102, 126, 234, 0.4)',
-                } 
-              }}
-            >
-              <GitHubIcon fontSize="small" />
-            </IconButton>
-            <IconButton
-              component="a"
-              href="https://www.linkedin.com/in/muhammad-noman-ali-70351b24a/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="LinkedIn"
-              sx={{ 
-                color: '#ffffff', 
-                backgroundColor: 'rgba(255, 255, 255, 0.08)',
-                border: '1px solid rgba(255, 255, 255, 0.12)',
-                p: 1.2,
-                transition: 'all 0.3s ease',
-                '&:hover': { 
-                  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                  transform: 'translateY(-3px)',
-                  boxShadow: '0 6px 16px rgba(102, 126, 234, 0.4)',
-                } 
-              }}
-            >
-              <LinkedInIcon fontSize="small" />
-            </IconButton>
+          {/* Quick Links */}
+          <Box
+            sx={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              gap: { xs: 2, sm: 3 },
+            }}
+          >
+            {navLinks.map((item) => (
+              <Box
+                key={item.path}
+                component={Link}
+                to={item.path}
+                sx={{
+                  color: '#94a3b8',
+                  textDecoration: 'none',
+                  fontSize: '0.88rem',
+                  fontWeight: 500,
+                  transition: 'color 0.2s ease',
+                  '&:hover': {
+                    color: '#22d3ee',
+                  },
+                }}
+              >
+                {item.label}
+              </Box>
+            ))}
+          </Box>
+
+          {/* Social Icons */}
+          <Box sx={{ display: 'flex', gap: 1.5 }}>
+            {[
+              {
+                icon: <GitHubIcon fontSize="small" />,
+                href: 'https://github.com/noman-ali24',
+                label: 'GitHub',
+              },
+              {
+                icon: <LinkedInIcon fontSize="small" />,
+                href: 'https://www.linkedin.com/in/muhammad-noman-ali-70351b24a/',
+                label: 'LinkedIn',
+              },
+              {
+                icon: <EmailIcon fontSize="small" />,
+                href: 'mailto:nomanali01241@gmail.com',
+                label: 'Email',
+              },
+              {
+                icon: <PhoneIcon fontSize="small" />,
+                href: 'tel:+923484622870',
+                label: 'Phone',
+              },
+            ].map((s, idx) => (
+              <IconButton
+                key={idx}
+                component="a"
+                href={s.href}
+                target={s.href.startsWith('http') ? '_blank' : undefined}
+                rel={s.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                aria-label={s.label}
+                sx={{
+                  width: 38,
+                  height: 38,
+                  backgroundColor: 'rgba(255, 255, 255, 0.04)',
+                  border: '1px solid rgba(255, 255, 255, 0.08)',
+                  color: '#94a3b8',
+                  '&:hover': {
+                    color: '#22d3ee',
+                    borderColor: 'rgba(34, 211, 238, 0.4)',
+                    backgroundColor: 'rgba(99, 102, 241, 0.15)',
+                  },
+                }}
+              >
+                {s.icon}
+              </IconButton>
+            ))}
           </Box>
         </Box>
 
+        {/* Copyright */}
         <Box
           sx={{
-            pt: 3,
-            borderTop: '1px solid rgba(255, 255, 255, 0.1)',
-            textAlign: 'center',
+            display: 'flex',
+            flexDirection: { xs: 'column', sm: 'row' },
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            gap: 2,
+            pt: 4,
           }}
         >
-          <Typography variant="body2" sx={{ mb: 0.8, color: '#e2e8f0', fontWeight: 500, fontSize: { xs: '0.85rem', sm: '0.9rem' } }}>
-            &copy; {currentYear} Muhammad Noman Ali. All rights reserved.
+          <Typography
+            variant="caption"
+            sx={{
+              color: '#64748b',
+              fontSize: '0.78rem',
+            }}
+          >
+            © {currentYear} Muhammad Noman Ali. Crafted with precision & React Native expertise.
           </Typography>
-          <Typography variant="caption" sx={{ color: '#94a3b8', fontSize: '0.8rem' }}>
-            Built with <span style={{ color: '#ef4444' }}>❤️</span> using React.js & Material UI
+
+          <Typography
+            variant="caption"
+            sx={{
+              color: '#64748b',
+              fontFamily: "'JetBrains Mono', monospace",
+              fontSize: '0.75rem',
+            }}
+          >
+            Karachi, Pakistan
           </Typography>
         </Box>
       </Container>
 
-      {/* Floating Scroll to top button */}
       <ScrollToTopFab />
     </Box>
   );
