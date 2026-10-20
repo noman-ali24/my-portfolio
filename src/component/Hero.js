@@ -22,7 +22,7 @@ const Hero = () => {
 
   const highlights = [
     { number: '2+', label: 'Years Experience' },
-    { number: '5+', label: 'Featured Projects' },
+    { number: '6+', label: 'Featured Projects' },
     { number: '100%', label: 'Mobile & Web Responsive' },
   ];
 
