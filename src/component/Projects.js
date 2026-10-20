@@ -18,7 +18,6 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import LaunchIcon from '@mui/icons-material/Launch';
-import StarIcon from '@mui/icons-material/Star';
 import SectionHeader from './SectionHeader';
 
 // Import videos
@@ -64,49 +63,38 @@ export const ALL_PROJECTS = [
   {
     id: 'autopulse',
     isFeatured: true,
-    title: 'AutoPulse',
-    subtitle: 'Automotive Service & Car Care Mobile Platform',
+    title: 'AutoPulse — Vehicle Care Platform',
     badge: 'MOBILE APP',
     category: 'Mobile App',
     deviceType: 'mobile',
     image: autopulseImg || '/autopulse.png',
     imageType: 'video',
     video: autopulseVideo,
-    skills: [
-      'React Native',
-      'TypeScript',
-      'Redux Toolkit',
-      'Node.js',
-      'Express',
-      'MongoDB',
-      'JWT Auth',
-    ],
+    skills: ['React Native', 'TypeScript', 'Redux', 'Node.js', 'Express', 'MongoDB'],
     githubLink: 'https://github.com/noman-ali24/signin-signup-frontend',
     backendGithubLink: 'https://github.com/noman-ali24/sign-in-sigup-Backend',
     description:
-      'A production-grade mobile application designed to streamline vehicle servicing and customer management. Engineered with React Native and Redux Toolkit on the client, backed by a Node.js/Express REST API with MongoDB and secure JWT authentication. Features end-to-end user onboarding, service scheduling, and high-performance mobile UI.',
+      'A production-grade mobile app for vehicle servicing and customer management with secure JWT authentication, real-time booking, and end-to-end REST APIs.',
   },
   {
     id: 'whatsapp-ui',
     isFeatured: false,
     title: 'React Native WhatsApp UI',
-    subtitle: 'Real-time Messaging & Social Client Experience',
     badge: 'MOBILE APP',
     category: 'Mobile App',
     deviceType: 'mobile',
     image: whatsapp1?.default || whatsapp1,
     imageType: 'gallery',
     images: whatsappImages,
-    skills: ['React Native', 'Redux', 'JavaScript', 'React Navigation', 'Mobile UI/UX'],
+    skills: ['React Native', 'Redux', 'JavaScript', 'React Navigation', 'UI/UX'],
     githubLink: 'https://github.com/noman-ali24/react-native-whatsapp-ui',
     description:
-      'A pixel-perfect WhatsApp mobile clone built in React Native. Implements responsive bottom tab navigation, searchable chat feeds, full-screen status viewing, and realistic voice & video call history interfaces.',
+      'A pixel-perfect WhatsApp mobile clone built in React Native featuring searchable chat feeds, full-screen status views, and call history screens.',
   },
   {
     id: 'admin-dashboard',
     isFeatured: false,
     title: 'E-Commerce Admin Dashboard',
-    subtitle: 'Enterprise Analytics & Inventory Management Portal',
     badge: 'WEB APP',
     category: 'Web App',
     deviceType: 'web',
@@ -114,16 +102,15 @@ export const ALL_PROJECTS = [
     image: '/admin.png',
     imageType: 'video',
     video: adminVideo,
-    skills: ['React.js', 'Material-UI', 'React Router DOM', 'JavaScript', 'Analytics'],
+    skills: ['React.js', 'Material-UI', 'React Router', 'Analytics', 'REST APIs'],
     githubLink: 'https://github.com/noman-ali24/E-Commerce-Admin-Dashboard',
     description:
-      'An administrative operations portal designed for e-commerce store managers. Features real-time metric cards, interactive sales charts, order lifecycle management, and paginated inventory data tables.',
+      'An enterprise administrative operations portal for store managers with real-time metric cards, interactive sales charts, and inventory tables.',
   },
   {
     id: 'ecommerce-website',
     isFeatured: false,
-    title: 'E-Commerce Website',
-    subtitle: 'Modern Responsive Customer Shopping Storefront',
+    title: 'E-Commerce Customer Website',
     badge: 'WEB APP',
     category: 'Web App',
     deviceType: 'web',
@@ -131,16 +118,15 @@ export const ALL_PROJECTS = [
     image: '/webiste.png',
     imageType: 'video',
     video: websiteVideo,
-    skills: ['React.js', 'Material-UI', 'React Router DOM', 'CSS3', 'REST APIs'],
+    skills: ['React.js', 'Material-UI', 'JavaScript', 'CSS3', 'REST APIs'],
     githubLink: 'https://github.com/noman-ali24/E-Commerce-Website',
     description:
-      'A full-featured digital storefront application featuring responsive product catalog browsing, instant category filtering, persistent shopping cart state, and a multi-step checkout workflow.',
+      'A modern responsive storefront with product catalog browsing, instant category filtering, persistent shopping cart, and checkout workflow.',
   },
   {
     id: 'olx-clone',
     isFeatured: false,
     title: 'OLX Marketplace Clone',
-    subtitle: 'Classifieds & Local Listing Web Platform',
     badge: 'WEB APP',
     category: 'Web App',
     deviceType: 'web',
@@ -150,13 +136,12 @@ export const ALL_PROJECTS = [
     skills: ['React.js', 'Material-UI', 'JavaScript', 'Responsive Grid'],
     githubLink: 'https://github.com/noman-ali24/OLX-WEBSITE',
     description:
-      'A front-end marketplace platform replicating the OLX classifieds experience. Features dynamic category exploration, header search navigation, structured item cards, and mobile-friendly browsing.',
+      'A classifieds marketplace web platform replicating the OLX experience with dynamic category exploration, search navigation, and item cards.',
   },
   {
     id: 'calculator-app',
     isFeatured: false,
     title: 'Calculator Web App',
-    subtitle: 'Interactive Digital Arithmetic Tool',
     badge: 'WEB APP',
     category: 'Web App',
     deviceType: 'web',
@@ -166,7 +151,7 @@ export const ALL_PROJECTS = [
     skills: ['HTML5', 'CSS3', 'JavaScript', 'DOM Manipulation'],
     githubLink: 'https://github.com/noman-ali24/calculator-html-css-js',
     description:
-      'A precision web calculator supporting standard arithmetic computations, keyboard event listeners, smooth visual keypress states, and an elegant dark-themed ergonomic interface.',
+      'An interactive digital arithmetic calculator with standard computations, keyboard event listeners, and an ergonomic dark interface.',
   },
 ];
 
@@ -234,11 +219,13 @@ const Projects = ({ isFullPage = false }) => {
 
   return (
     <Box id="projects" sx={{ py: { xs: 8, md: 12 }, position: 'relative' }}>
-      <Container maxWidth="lg" sx={{ px: { xs: 2.5, sm: 4, md: 5 } }}>
+      {/* Wide Container for elegant card proportions matching Image 1 */}
+      <Container maxWidth={false} sx={{ maxWidth: '1380px', px: { xs: 2.5, sm: 4, md: 5 } }}>
         <SectionHeader
           eyebrow="SELECTED WORK"
           title={isFullPage ? 'Portfolio Projects' : 'Featured Projects'}
-          subtitle="Shipped applications across mobile and web — click or hover a card to preview."
+          // subtitle="Shipped apps on the App Store & Google Play — hover a card to explore."
+          subtitle="A showcase of my projects, code, and development demos."
         />
 
         {/* Filter Pills */}
@@ -282,7 +269,7 @@ const Projects = ({ isFullPage = false }) => {
           })}
         </Box>
 
-        {/* Projects Grid: 3-column on Desktop, 2 on Tablet, 1 on Mobile */}
+        {/* Projects Grid: 3-column Desktop Grid with Wide Cards (Matching Image 1) */}
         <Box
           sx={{
             display: 'grid',
@@ -302,46 +289,49 @@ const Projects = ({ isFullPage = false }) => {
             return (
               <Box
                 key={project.id}
-                className="glass-panel glass-panel-hover"
+                onClick={() => handleOpenPreview(project)}
                 sx={{
-                  borderRadius: '24px',
+                  borderRadius: '20px',
                   overflow: 'hidden',
                   display: 'flex',
                   flexDirection: 'column',
                   height: '100%',
-                  border: project.isFeatured
-                    ? '1px solid rgba(34, 211, 238, 0.35)'
-                    : '1px solid rgba(255, 255, 255, 0.08)',
-                  boxShadow: project.isFeatured
-                    ? '0 0 30px -10px rgba(34, 211, 238, 0.25)'
-                    : 'none',
+                  backgroundColor: 'rgba(9, 12, 28, 0.85)',
+                  backdropFilter: 'blur(16px)',
+                  border: '1px solid rgba(255, 255, 255, 0.08)',
+                  cursor: 'pointer',
+                  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                  '&:hover': {
+                    transform: 'translateY(-4px)',
+                    borderColor: 'rgba(34, 211, 238, 0.45)',
+                    boxShadow: '0 16px 36px -10px rgba(34, 211, 238, 0.25)',
+                    '& .card-hover-overlay': {
+                      opacity: 1,
+                    },
+                  },
                 }}
               >
-                {/* Media Preview Container */}
+                {/* Media Preview Container (Matching Image 1) */}
                 <Box
                   sx={{
                     position: 'relative',
                     width: '100%',
-                    height: 235,
-                    backgroundColor: '#070914',
+                    height: 255,
+                    backgroundColor: '#060814',
                     display: 'flex',
                     flexDirection: 'column',
                     overflow: 'hidden',
-                    cursor: 'pointer',
+                    p: 2,
+                    pb: 1.5,
                   }}
-                  onClick={() => handleOpenPreview(project)}
                 >
-                  {/* Category & Featured Badge overlay */}
+                  {/* Top-Left Platform Badge (Matching Image 1) */}
                   <Box
                     sx={{
                       position: 'absolute',
-                      top: 10,
-                      left: 10,
-                      right: 10,
+                      top: 14,
+                      left: 14,
                       zIndex: 4,
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      alignItems: 'center',
                       pointerEvents: 'none',
                     }}
                   >
@@ -349,83 +339,25 @@ const Projects = ({ isFullPage = false }) => {
                       label={project.badge}
                       size="small"
                       sx={{
-                        backgroundColor: 'rgba(5, 6, 15, 0.85)',
+                        backgroundColor:
+                          project.deviceType === 'mobile'
+                            ? 'rgba(34, 211, 238, 0.12)'
+                            : 'rgba(99, 102, 241, 0.16)',
                         backdropFilter: 'blur(8px)',
                         color: project.deviceType === 'mobile' ? '#22d3ee' : '#a78bfa',
                         border: `1px solid ${
                           project.deviceType === 'mobile'
-                            ? 'rgba(34, 211, 238, 0.4)'
-                            : 'rgba(167, 139, 250, 0.4)'
+                            ? 'rgba(34, 211, 238, 0.35)'
+                            : 'rgba(167, 139, 250, 0.35)'
                         }`,
                         fontFamily: "'JetBrains Mono', monospace",
                         fontWeight: 700,
-                        fontSize: '0.66rem',
+                        fontSize: '0.64rem',
                         letterSpacing: '0.06em',
+                        height: 24,
                       }}
                     />
-
-                    {project.isFeatured && (
-                      <Chip
-                        icon={<StarIcon sx={{ fontSize: '0.85rem !important', color: '#f59e0b' }} />}
-                        label="FEATURED"
-                        size="small"
-                        sx={{
-                          backgroundColor: 'rgba(245, 158, 11, 0.15)',
-                          backdropFilter: 'blur(8px)',
-                          color: '#fbbf24',
-                          border: '1px solid rgba(245, 158, 11, 0.4)',
-                          fontFamily: "'JetBrains Mono', monospace",
-                          fontWeight: 700,
-                          fontSize: '0.64rem',
-                          letterSpacing: '0.06em',
-                        }}
-                      />
-                    )}
                   </Box>
-
-                  {/* Browser Mockup Header for Web Projects */}
-                  {project.deviceType === 'web' && (
-                    <Box
-                      sx={{
-                        width: '100%',
-                        height: 28,
-                        backgroundColor: 'rgba(15, 18, 35, 0.95)',
-                        borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        px: 1.5,
-                        gap: 0.8,
-                        flexShrink: 0,
-                      }}
-                    >
-                      {/* Window Dots */}
-                      <Box sx={{ display: 'flex', gap: 0.6 }}>
-                        <Box sx={{ width: 8, height: 8, borderRadius: '50%', backgroundColor: '#ef4444' }} />
-                        <Box sx={{ width: 8, height: 8, borderRadius: '50%', backgroundColor: '#f59e0b' }} />
-                        <Box sx={{ width: 8, height: 8, borderRadius: '50%', backgroundColor: '#10b981' }} />
-                      </Box>
-
-                      {/* Mockup URL Address pill */}
-                      <Box
-                        sx={{
-                          mx: 'auto',
-                          px: 1.8,
-                          py: 0.2,
-                          borderRadius: '9999px',
-                          backgroundColor: 'rgba(255, 255, 255, 0.05)',
-                          border: '1px solid rgba(255, 255, 255, 0.08)',
-                          color: '#94a3b8',
-                          fontFamily: "'JetBrains Mono', monospace",
-                          fontSize: '0.64rem',
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: 0.5,
-                        }}
-                      >
-                        🔒 {project.domain || 'localhost'}
-                      </Box>
-                    </Box>
-                  )}
 
                   {/* Media Content Display */}
                   <Box
@@ -436,21 +368,22 @@ const Projects = ({ isFullPage = false }) => {
                       justifyContent: 'center',
                       position: 'relative',
                       overflow: 'hidden',
-                      p: project.deviceType === 'mobile' ? 1.5 : 0,
+                      width: '100%',
+                      pt: 1.5,
                     }}
                   >
                     {project.deviceType === 'mobile' ? (
-                      /* Phone Device Mockup Frame */
+                      /* Phone Device Mockup Frame (Matches Image 1 Center Card) */
                       <Box
                         sx={{
                           width: 'auto',
                           height: '92%',
                           maxHeight: 185,
-                          aspectRatio: '9 / 18',
-                          borderRadius: '16px',
+                          aspectRatio: '9 / 18.5',
+                          borderRadius: '20px',
                           overflow: 'hidden',
-                          border: '2.5px solid rgba(255, 255, 255, 0.2)',
-                          boxShadow: '0 10px 25px rgba(0,0,0,0.7)',
+                          border: '2px solid rgba(255, 255, 255, 0.85)',
+                          boxShadow: '0 10px 28px rgba(0, 0, 0, 0.85)',
                           backgroundColor: '#000',
                           position: 'relative',
                         }}
@@ -462,10 +395,10 @@ const Projects = ({ isFullPage = false }) => {
                             top: 4,
                             left: '50%',
                             transform: 'translateX(-50%)',
-                            width: 24,
+                            width: 22,
                             height: 3,
                             borderRadius: '9999px',
-                            backgroundColor: 'rgba(255, 255, 255, 0.4)',
+                            backgroundColor: 'rgba(255, 255, 255, 0.6)',
                             zIndex: 3,
                           }}
                         />
@@ -481,160 +414,260 @@ const Projects = ({ isFullPage = false }) => {
                         />
                       </Box>
                     ) : (
-                      /* Web App screenshot with smooth zoom on hover */
-                      <Box
-                        component="img"
-                        src={displayImage}
-                        alt={project.title}
-                        sx={{
-                          width: '100%',
-                          height: '100%',
-                          objectFit: 'cover',
-                          objectPosition: 'top',
-                          transition: 'transform 0.4s ease',
-                          '&:hover': {
-                            transform: 'scale(1.04)',
-                          },
-                        }}
-                      />
-                    )}
-
-                    {/* Play Video Overlay for projects with video */}
-                    {project.video && (
+                      /* Browser Window Frame for Web Projects (Matches Image 1 Left Card) */
                       <Box
                         sx={{
-                          position: 'absolute',
-                          inset: 0,
+                          width: '96%',
+                          height: '94%',
+                          borderRadius: '10px',
+                          overflow: 'hidden',
+                          border: '1px solid rgba(255, 255, 255, 0.12)',
+                          backgroundColor: '#0d1024',
                           display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          backgroundColor: 'rgba(5, 6, 15, 0.35)',
-                          transition: 'background-color 0.2s ease',
-                          '&:hover': {
-                            backgroundColor: 'rgba(5, 6, 15, 0.15)',
-                          },
+                          flexDirection: 'column',
+                          boxShadow: '0 10px 24px rgba(0, 0, 0, 0.7)',
                         }}
                       >
+                        {/* Browser Topbar with Window Dots */}
                         <Box
                           sx={{
-                            width: 44,
-                            height: 44,
-                            borderRadius: '50%',
-                            backgroundColor: 'rgba(34, 211, 238, 0.9)',
+                            height: 20,
+                            backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                            borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
                             display: 'flex',
                             alignItems: 'center',
-                            justifyContent: 'center',
-                            color: '#05060f',
-                            boxShadow: '0 0 20px rgba(34, 211, 238, 0.7)',
-                            transition: 'transform 0.2s ease',
-                            '&:hover': {
-                              transform: 'scale(1.1)',
-                            },
+                            px: 1,
+                            gap: 0.6,
                           }}
                         >
-                          <PlayArrowRoundedIcon sx={{ fontSize: 30 }} />
+                          <Box sx={{ width: 6, height: 6, borderRadius: '50%', backgroundColor: '#ef4444' }} />
+                          <Box sx={{ width: 6, height: 6, borderRadius: '50%', backgroundColor: '#f59e0b' }} />
+                          <Box sx={{ width: 6, height: 6, borderRadius: '50%', backgroundColor: '#10b981' }} />
                         </Box>
+                        {/* Web Screenshot with smooth hover zoom */}
+                        <Box
+                          component="img"
+                          src={displayImage}
+                          alt={project.title}
+                          sx={{
+                            width: '100%',
+                            height: '100%',
+                            objectFit: 'cover',
+                            objectPosition: 'top',
+                            transition: 'transform 0.4s ease',
+                            '&:hover': {
+                              transform: 'scale(1.04)',
+                            },
+                          }}
+                        />
                       </Box>
                     )}
 
-                    {/* Multi-image indicator dots for WhatsApp gallery */}
-                    {hasMultipleImages && (
-                      <Box
+                    {/* Sleek Interactive Hover Overlay (allows instant demo or GitHub access on hover) */}
+                    <Box
+                      className="card-hover-overlay"
+                      sx={{
+                        position: 'absolute',
+                        inset: 0,
+                        backgroundColor: 'rgba(5, 6, 15, 0.72)',
+                        backdropFilter: 'blur(4px)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: 1.5,
+                        opacity: 0,
+                        transition: 'opacity 0.25s ease',
+                        zIndex: 5,
+                      }}
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <Button
+                        size="small"
+                        onClick={() => handleOpenPreview(project)}
+                        startIcon={project.video ? <PlayArrowRoundedIcon /> : <LaunchIcon />}
+                        className="btn-primary-gradient"
                         sx={{
-                          position: 'absolute',
-                          bottom: 8,
-                          left: '50%',
-                          transform: 'translateX(-50%)',
-                          display: 'flex',
-                          gap: 0.6,
-                          zIndex: 3,
-                          backgroundColor: 'rgba(5, 6, 15, 0.7)',
-                          px: 1.2,
-                          py: 0.3,
+                          px: 2.2,
+                          py: 0.7,
+                          fontSize: '0.78rem',
+                          textTransform: 'none',
                           borderRadius: '9999px',
                         }}
-                        onClick={(e) => e.stopPropagation()}
                       >
-                        {project.images.slice(0, 6).map((_, dotIdx) => (
-                          <Box
-                            key={dotIdx}
-                            onClick={() =>
+                        {project.video ? 'Watch Demo' : 'View Gallery'}
+                      </Button>
+
+                      {project.githubLink && (
+                        <Tooltip title={project.backendGithubLink ? 'Frontend Code' : 'GitHub Code'}>
+                          <IconButton
+                            component="a"
+                            href={project.githubLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={`${project.title} GitHub`}
+                            sx={{
+                              width: 36,
+                              height: 36,
+                              backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                              border: '1px solid rgba(255, 255, 255, 0.2)',
+                              color: '#ffffff',
+                              '&:hover': {
+                                backgroundColor: 'rgba(34, 211, 238, 0.3)',
+                                borderColor: '#22d3ee',
+                                color: '#22d3ee',
+                              },
+                            }}
+                          >
+                            <GitHubIcon sx={{ fontSize: '1.05rem' }} />
+                          </IconButton>
+                        </Tooltip>
+                      )}
+
+                      {project.backendGithubLink && (
+                        <Tooltip title="Backend Code">
+                          <IconButton
+                            component="a"
+                            href={project.backendGithubLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={`${project.title} Backend API`}
+                            sx={{
+                              width: 36,
+                              height: 36,
+                              backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                              border: '1px solid rgba(255, 255, 255, 0.2)',
+                              color: '#ffffff',
+                              '&:hover': {
+                                backgroundColor: 'rgba(167, 139, 250, 0.3)',
+                                borderColor: '#a78bfa',
+                                color: '#a78bfa',
+                              },
+                            }}
+                          >
+                            <GitHubIcon sx={{ fontSize: '1.05rem' }} />
+                          </IconButton>
+                        </Tooltip>
+                      )}
+                    </Box>
+                  </Box>
+
+                  {/* Carousel Indicator Dots (Matching Image 1: Cyan dot + Inactive dots) */}
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      gap: 0.6,
+                      pt: 1,
+                    }}
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    {[0, 1, 2].map((dotIdx) => {
+                      const isActive = hasMultipleImages ? currentImgIdx % 3 === dotIdx : dotIdx === 0;
+                      return (
+                        <Box
+                          key={dotIdx}
+                          onClick={() => {
+                            if (hasMultipleImages) {
                               setCardImageIndices((prev) => ({
                                 ...prev,
                                 [project.id]: dotIdx,
-                              }))
+                              }));
                             }
-                            sx={{
-                              width: currentImgIdx === dotIdx ? 12 : 5,
-                              height: 5,
-                              borderRadius: '9999px',
-                              backgroundColor:
-                                currentImgIdx === dotIdx ? '#22d3ee' : 'rgba(255, 255, 255, 0.4)',
-                              cursor: 'pointer',
-                              transition: 'all 0.2s ease',
-                            }}
-                          />
-                        ))}
-                      </Box>
-                    )}
+                          }}
+                          sx={{
+                            width: isActive ? 14 : 5,
+                            height: 5,
+                            borderRadius: '9999px',
+                            backgroundColor: isActive ? '#22d3ee' : 'rgba(255, 255, 255, 0.3)',
+                            cursor: hasMultipleImages ? 'pointer' : 'default',
+                            transition: 'all 0.25s ease',
+                          }}
+                        />
+                      );
+                    })}
                   </Box>
                 </Box>
 
-                {/* Card Content Area */}
+                {/* Card Content Area (Ending after Tech Tags, Matching Image 1) */}
                 <Box
                   sx={{
-                    p: { xs: 2.5, sm: 3 },
+                    p: 2.5,
+                    pt: 2,
+                    pb: 2.5,
                     display: 'flex',
                     flexDirection: 'column',
                     flexGrow: 1,
                   }}
                 >
-                  <Typography
-                    variant="h6"
+                  {/* Title Row: Title on Left, Category on Right (Matching Image 1) */}
+                  <Box
                     sx={{
-                      fontWeight: 700,
-                      fontSize: '1.15rem',
-                      color: '#ffffff',
-                      lineHeight: 1.3,
-                      mb: 0.5,
+                      display: 'flex',
+                      alignItems: 'baseline',
+                      justifyContent: 'space-between',
+                      gap: 1.5,
+                      mb: 1,
                     }}
                   >
-                    {project.title}
-                  </Typography>
+                    <Typography
+                      variant="h6"
+                      sx={{
+                        fontWeight: 700,
+                        fontSize: '1.05rem',
+                        color: '#ffffff',
+                        lineHeight: 1.3,
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                        whiteSpace: 'nowrap',
+                      }}
+                    >
+                      {project.title}
+                    </Typography>
 
-                  <Typography
-                    variant="caption"
-                    sx={{
-                      color: '#22d3ee',
-                      fontFamily: "'JetBrains Mono', monospace",
-                      fontSize: '0.74rem',
-                      fontWeight: 500,
-                      mb: 1.5,
-                    }}
-                  >
-                    {project.subtitle}
-                  </Typography>
+                    <Typography
+                      variant="caption"
+                      sx={{
+                        fontFamily: "'JetBrains Mono', monospace",
+                        color: '#64748b',
+                        fontSize: '0.66rem',
+                        fontWeight: 600,
+                        letterSpacing: '0.06em',
+                        flexShrink: 0,
+                      }}
+                    >
+                      {project.badge}
+                    </Typography>
+                  </Box>
 
+                  {/* 2-Line Description (Matching Image 1) */}
                   <Typography
                     variant="body2"
                     sx={{
                       color: '#94a3b8',
-                      fontSize: '0.85rem',
-                      lineHeight: 1.6,
-                      mb: 2.5,
-                      flexGrow: 1,
+                      fontSize: '0.84rem',
+                      lineHeight: 1.55,
+                      mb: 2,
                       display: '-webkit-box',
-                      WebkitLineClamp: 3,
+                      WebkitLineClamp: 2,
                       WebkitBoxOrient: 'vertical',
                       overflow: 'hidden',
+                      minHeight: '2.6em',
                     }}
                   >
                     {project.description}
                   </Typography>
 
-                  {/* Skills Pills */}
-                  <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.75, mb: 3 }}>
-                    {project.skills.map((skill, sIdx) => (
+                  {/* Technology Badges Row (Matching Image 1: compact rounded pills) */}
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      flexWrap: 'wrap',
+                      gap: 0.75,
+                      alignItems: 'center',
+                    }}
+                  >
+                    {project.skills.slice(0, 4).map((skill, sIdx) => (
                       <Box
                         key={sIdx}
                         sx={{
@@ -645,96 +678,28 @@ const Projects = ({ isFullPage = false }) => {
                           border: '1px solid rgba(255, 255, 255, 0.08)',
                           color: '#cbd5e1',
                           fontSize: '0.72rem',
+                          fontFamily: "'Poppins', sans-serif",
                           fontWeight: 500,
                         }}
                       >
                         {skill}
                       </Box>
                     ))}
-                  </Box>
-
-                  {/* Action Buttons Row */}
-                  <Box
-                    sx={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: 1.25,
-                      pt: 2,
-                      borderTop: '1px solid rgba(255, 255, 255, 0.07)',
-                    }}
-                  >
-                    {/* View Preview / Play Video Button */}
-                    <Button
-                      fullWidth
-                      onClick={() => handleOpenPreview(project)}
-                      startIcon={project.video ? <PlayArrowRoundedIcon /> : <LaunchIcon />}
-                      className="btn-secondary-glass"
-                      sx={{
-                        py: 0.8,
-                        fontSize: '0.8rem',
-                        textTransform: 'none',
-                        flex: 1,
-                      }}
-                    >
-                      {project.video ? 'Watch Demo' : 'View Gallery'}
-                    </Button>
-
-                    {/* GitHub Link */}
-                    {project.githubLink && (
-                      <Tooltip title={project.backendGithubLink ? 'Frontend Repository' : 'GitHub Repository'}>
-                        <IconButton
-                          component="a"
-                          href={project.githubLink}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          aria-label={`${project.title} GitHub Repository`}
-                          sx={{
-                            width: 38,
-                            height: 38,
-                            borderRadius: '50%',
-                            backgroundColor: 'rgba(255, 255, 255, 0.05)',
-                            border: '1px solid rgba(255, 255, 255, 0.1)',
-                            color: '#cbd5e1',
-                            transition: 'all 0.2s ease',
-                            '&:hover': {
-                              backgroundColor: 'rgba(99, 102, 241, 0.25)',
-                              borderColor: '#22d3ee',
-                              color: '#22d3ee',
-                            },
-                          }}
-                        >
-                          <GitHubIcon sx={{ fontSize: '1.1rem' }} />
-                        </IconButton>
-                      </Tooltip>
-                    )}
-
-                    {/* Backend GitHub Link for AutoPulse */}
-                    {project.backendGithubLink && (
-                      <Tooltip title="Backend API Repository">
-                        <IconButton
-                          component="a"
-                          href={project.backendGithubLink}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          aria-label={`${project.title} Backend API Repository`}
-                          sx={{
-                            width: 38,
-                            height: 38,
-                            borderRadius: '50%',
-                            backgroundColor: 'rgba(255, 255, 255, 0.05)',
-                            border: '1px solid rgba(255, 255, 255, 0.1)',
-                            color: '#cbd5e1',
-                            transition: 'all 0.2s ease',
-                            '&:hover': {
-                              backgroundColor: 'rgba(99, 102, 241, 0.25)',
-                              borderColor: '#a78bfa',
-                              color: '#a78bfa',
-                            },
-                          }}
-                        >
-                          <GitHubIcon sx={{ fontSize: '1.1rem' }} />
-                        </IconButton>
-                      </Tooltip>
+                    {project.skills.length > 4 && (
+                      <Box
+                        sx={{
+                          px: 1,
+                          py: 0.35,
+                          borderRadius: '9999px',
+                          backgroundColor: 'rgba(255, 255, 255, 0.02)',
+                          border: '1px solid rgba(255, 255, 255, 0.06)',
+                          color: '#64748b',
+                          fontSize: '0.68rem',
+                          fontWeight: 500,
+                        }}
+                      >
+                        +{project.skills.length - 4}
+                      </Box>
                     )}
                   </Box>
                 </Box>
@@ -796,7 +761,7 @@ const Projects = ({ isFullPage = false }) => {
               {activeProject?.title}
             </Typography>
             <Typography variant="caption" sx={{ color: '#22d3ee' }}>
-              {activeProject?.subtitle}
+              {activeProject?.subtitle || activeProject?.badge}
             </Typography>
           </Box>
           <IconButton

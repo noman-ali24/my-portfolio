@@ -1,21 +1,38 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Box, Typography } from '@mui/material';
 
+// Vibrant electrons matching Image 2 reference
 const TECH_ELECTRONS = [
-  { name: 'React Native', color: '#61dafb', orbit: 0, speed: 0.015, phase: 0 },
-  { name: 'Node.js', color: '#68a063', orbit: 0, speed: 0.015, phase: Math.PI },
-  { name: 'TypeScript', color: '#3178c6', orbit: 1, speed: 0.012, phase: 0.8 },
-  { name: 'MongoDB', color: '#47a248', orbit: 1, speed: 0.012, phase: 0.8 + Math.PI },
-  { name: 'Express.js', color: '#f59e0b', orbit: 2, speed: 0.018, phase: 1.5 },
-  { name: 'Redux Toolkit', color: '#a78bfa', orbit: 2, speed: 0.018, phase: 1.5 + Math.PI },
-  { name: 'REST APIs', color: '#22d3ee', orbit: 0, speed: 0.014, phase: 2.3 },
-  { name: 'Firebase', color: '#ffca28', orbit: 1, speed: 0.011, phase: 2.7 },
+  { name: 'React Native', color: '#22d3ee', orbit: 0, speed: 0.016, phase: 0 },
+  { name: 'Node.js', color: '#4ade80', orbit: 0, speed: 0.016, phase: Math.PI },
+  { name: 'TypeScript', color: '#38bdf8', orbit: 1, speed: 0.013, phase: 0.7 },
+  { name: 'MongoDB', color: '#facc15', orbit: 1, speed: 0.013, phase: 0.7 + Math.PI },
+  { name: 'Express.js', color: '#fb7185', orbit: 2, speed: 0.019, phase: 1.4 },
+  { name: 'Redux Toolkit', color: '#c084fc', orbit: 2, speed: 0.019, phase: 1.4 + Math.PI },
+  { name: 'REST APIs', color: '#ffffff', orbit: 0, speed: 0.015, phase: 2.2 },
+  { name: 'Firebase', color: '#fb923c', orbit: 1, speed: 0.012, phase: 2.8 },
+  { name: 'React.js', color: '#67e8f9', orbit: 2, speed: 0.017, phase: 0.2 },
+  { name: 'JavaScript', color: '#fef08a', orbit: 0, speed: 0.014, phase: 4.1 },
 ];
 
 const ORBIT_ANGLES = [
-  { tiltZ: 0.65, radiusX: 175, radiusY: 72 },
-  { tiltZ: -0.6, radiusX: 190, radiusY: 78 },
-  { tiltZ: 0.1, radiusX: 165, radiusY: 68 },
+  { tiltZ: 0.62, radiusX: 168, radiusY: 74 },
+  { tiltZ: -0.58, radiusX: 182, radiusY: 80 },
+  { tiltZ: 0.12, radiusX: 158, radiusY: 66 },
+];
+
+// Fixed background cosmic dust specks matching Image 2
+const COSMIC_DUST = [
+  { x: 0.18, y: 0.15, size: 2.5, isSquare: true, opacity: 0.4 },
+  { x: 0.82, y: 0.18, size: 2, isSquare: false, opacity: 0.35 },
+  { x: 0.12, y: 0.68, size: 1.8, isSquare: false, opacity: 0.3 },
+  { x: 0.88, y: 0.75, size: 3, isSquare: true, opacity: 0.45 },
+  { x: 0.52, y: 0.72, size: 3.5, isSquare: true, opacity: 0.5 },
+  { x: 0.84, y: 0.86, size: 2.5, isSquare: true, opacity: 0.35 },
+  { x: 0.28, y: 0.79, size: 1.5, isSquare: false, opacity: 0.3 },
+  { x: 0.68, y: 0.12, size: 1.8, isSquare: false, opacity: 0.25 },
+  { x: 0.38, y: 0.28, size: 2, isSquare: false, opacity: 0.3 },
+  { x: 0.78, y: 0.42, size: 2, isSquare: false, opacity: 0.25 },
 ];
 
 const AtomStack = () => {
@@ -55,7 +72,21 @@ const AtomStack = () => {
     const drawFrame = (currentAngle) => {
       ctx.clearRect(0, 0, width, height);
 
-      // Draw Orbit Rings
+      // 1. Draw Cosmic Dust / Micro Stars (matches Image 2)
+      COSMIC_DUST.forEach((dust) => {
+        const dx = dust.x * width;
+        const dy = dust.y * height;
+        ctx.fillStyle = `rgba(255, 255, 255, ${dust.opacity})`;
+        if (dust.isSquare) {
+          ctx.fillRect(dx - dust.size / 2, dy - dust.size / 2, dust.size, dust.size);
+        } else {
+          ctx.beginPath();
+          ctx.arc(dx, dy, dust.size / 2, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      });
+
+      // 2. Draw 3D Orbit Rings with subtle cyan glow
       ORBIT_ANGLES.forEach((orb) => {
         ctx.save();
         ctx.translate(centerX, centerY);
@@ -64,58 +95,110 @@ const AtomStack = () => {
 
         ctx.beginPath();
         ctx.arc(0, 0, orb.radiusX, 0, Math.PI * 2);
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.11)';
-        ctx.lineWidth = 1.2;
+        ctx.strokeStyle = 'rgba(56, 189, 248, 0.22)';
+        ctx.lineWidth = 1.3;
         ctx.stroke();
 
         ctx.restore();
       });
 
-      // Draw Central Glowing Nucleus
-      const nucleusPulse = prefersReducedMotion ? 0 : Math.sin(currentAngle * 2) * 3;
-      const nucleusRadius = 52 + nucleusPulse;
+      // 3. Draw Central Lavender Faceted Nucleus (matches Image 2)
+      const nucleusPulse = prefersReducedMotion ? 0 : Math.sin(currentAngle * 1.35) * 3.4;
+      const nucleusRadius = 48 + nucleusPulse;
 
-      const grad = ctx.createRadialGradient(
-        centerX - 8,
-        centerY - 8,
-        8,
+      // Outer ambient translucent violet glow
+      const outerGlow = ctx.createRadialGradient(
         centerX,
         centerY,
-        nucleusRadius + 18
+        nucleusRadius * 0.4,
+        centerX,
+        centerY,
+        nucleusRadius + 32
       );
-      grad.addColorStop(0, 'rgba(167, 139, 250, 0.95)');
-      grad.addColorStop(0.4, 'rgba(99, 102, 241, 0.65)');
-      grad.addColorStop(0.8, 'rgba(34, 211, 238, 0.3)');
-      grad.addColorStop(1, 'rgba(15, 23, 42, 0)');
+      outerGlow.addColorStop(0, 'rgba(168, 140, 255, 0.35)');
+      outerGlow.addColorStop(0.5, 'rgba(120, 80, 220, 0.2)');
+      outerGlow.addColorStop(0.85, 'rgba(34, 211, 238, 0.08)');
+      outerGlow.addColorStop(1, 'rgba(0, 0, 0, 0)');
 
-      ctx.fillStyle = grad;
+      ctx.fillStyle = outerGlow;
       ctx.beginPath();
-      ctx.arc(centerX, centerY, nucleusRadius + 18, 0, Math.PI * 2);
+      ctx.arc(centerX, centerY, nucleusRadius + 32, 0, Math.PI * 2);
       ctx.fill();
 
-      // Faceted Geometric Core
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.28)';
-      ctx.lineWidth = 1;
+      // Translucent lavender sphere body
+      const coreGrad = ctx.createRadialGradient(
+        centerX - nucleusRadius * 0.25,
+        centerY - nucleusRadius * 0.25,
+        nucleusRadius * 0.1,
+        centerX,
+        centerY,
+        nucleusRadius
+      );
+      coreGrad.addColorStop(0, 'rgba(230, 220, 255, 0.95)');
+      coreGrad.addColorStop(0.35, 'rgba(190, 165, 255, 0.85)');
+      coreGrad.addColorStop(0.75, 'rgba(145, 115, 240, 0.7)');
+      coreGrad.addColorStop(1, 'rgba(90, 60, 180, 0.6)');
+
+      ctx.fillStyle = coreGrad;
       ctx.beginPath();
-      for (let i = 0; i < 6; i++) {
-        const rad = (i * Math.PI) / 3 + currentAngle * 0.4;
-        const px = centerX + Math.cos(rad) * (nucleusRadius * 0.62);
-        const py = centerY + Math.sin(rad) * (nucleusRadius * 0.62);
-        if (i === 0) ctx.moveTo(px, py);
-        else ctx.lineTo(px, py);
-      }
-      ctx.closePath();
+      ctx.arc(centerX, centerY, nucleusRadius, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Outer delicate sphere rim
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.35)';
+      ctx.lineWidth = 1;
       ctx.stroke();
 
-      // Draw Electrons & Detect Touch/Hover
+      // Geodesic 3D Wireframe Facets across nucleus (matches Image 2)
+      const facetPoints = [
+        { u: -0.6, v: -0.3 },
+        { u: 0.1, v: -0.65 },
+        { u: 0.65, v: -0.2 },
+        { u: 0.5, v: 0.5 },
+        { u: -0.15, v: 0.65 },
+        { u: -0.7, v: 0.2 },
+        { u: 0, v: 0 },
+      ];
+
+      const rot = currentAngle * 0.12;
+      const cosR = Math.cos(rot);
+      const sinR = Math.sin(rot);
+
+      const transformedPoints = facetPoints.map((pt) => {
+        const rx = pt.u * cosR - pt.v * sinR;
+        const ry = pt.u * sinR + pt.v * cosR;
+        return {
+          x: centerX + rx * (nucleusRadius * 0.85),
+          y: centerY + ry * (nucleusRadius * 0.85),
+        };
+      });
+
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.38)';
+      ctx.lineWidth = 0.9;
+
+      // Facet triangulation lines
+      const edges = [
+        [0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [5, 0],
+        [6, 0], [6, 1], [6, 2], [6, 3], [6, 4], [6, 5],
+      ];
+
+      edges.forEach(([p1, p2]) => {
+        ctx.beginPath();
+        ctx.moveTo(transformedPoints[p1].x, transformedPoints[p1].y);
+        ctx.lineTo(transformedPoints[p2].x, transformedPoints[p2].y);
+        ctx.stroke();
+      });
+
+      // 4. Calculate Electron Positions
       let currentlyHovered = null;
       const mouse = mousePosRef.current;
+      const electronPositions = [];
 
       TECH_ELECTRONS.forEach((electron) => {
         const orb = ORBIT_ANGLES[electron.orbit];
         const electronAngle = prefersReducedMotion
           ? electron.phase
-          : currentAngle * (electron.speed * 35) + electron.phase;
+          : currentAngle * (electron.speed * 12) + electron.phase;
 
         const ex0 = Math.cos(electronAngle) * orb.radiusX;
         const ey0 = Math.sin(electronAngle) * orb.radiusY;
@@ -126,40 +209,75 @@ const AtomStack = () => {
         const ey = centerY + (ex0 * sinT + ey0 * cosT);
 
         const dist = Math.hypot(mouse.x - ex, mouse.y - ey);
-        const isHovered = dist < 24;
+        const isHovered = dist < 22;
         if (isHovered) currentlyHovered = electron.name;
 
-        const radius = isHovered ? 11 : 8.5;
+        electronPositions.push({
+          ...electron,
+          x: ex,
+          y: ey,
+          isHovered,
+        });
+      });
 
-        // Electron Glow
-        const eGrad = ctx.createRadialGradient(ex, ey, 2, ex, ey, radius * 2.6);
-        eGrad.addColorStop(0, '#ffffff');
-        eGrad.addColorStop(0.4, electron.color);
-        eGrad.addColorStop(1, 'rgba(0,0,0,0)');
+      // 5. Draw Constellation Connectors between paired electrons (matches Image 2)
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.16)';
+      ctx.lineWidth = 0.8;
+      const connections = [
+        [0, 8],
+        [4, 1],
+        [7, 3],
+        [2, 9],
+      ];
+      connections.forEach(([i1, i2]) => {
+        if (electronPositions[i1] && electronPositions[i2]) {
+          ctx.beginPath();
+          ctx.moveTo(electronPositions[i1].x, electronPositions[i1].y);
+          ctx.lineTo(electronPositions[i2].x, electronPositions[i2].y);
+          ctx.stroke();
+        }
+      });
 
-        ctx.fillStyle = eGrad;
+      // 6. Draw Electrons with Glowing Halos & Specular Shine
+      electronPositions.forEach((electron) => {
+        const radius = electron.isHovered ? 12 : 9;
+
+        // Glowing outer halo
+        const haloGrad = ctx.createRadialGradient(
+          electron.x,
+          electron.y,
+          2,
+          electron.x,
+          electron.y,
+          radius * 2.8
+        );
+        haloGrad.addColorStop(0, '#ffffff');
+        haloGrad.addColorStop(0.35, electron.color);
+        haloGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+
+        ctx.fillStyle = haloGrad;
         ctx.beginPath();
-        ctx.arc(ex, ey, radius * 2.4, 0, Math.PI * 2);
+        ctx.arc(electron.x, electron.y, radius * 2.8, 0, Math.PI * 2);
         ctx.fill();
 
-        // Electron Solid Core
+        // Solid electron sphere body
         ctx.fillStyle = electron.color;
         ctx.beginPath();
-        ctx.arc(ex, ey, radius, 0, Math.PI * 2);
+        ctx.arc(electron.x, electron.y, radius, 0, Math.PI * 2);
         ctx.fill();
 
-        // Core Shine
+        // White Specular Highlight (top-left shine)
         ctx.fillStyle = '#ffffff';
         ctx.beginPath();
-        ctx.arc(ex - 2, ey - 2, radius * 0.35, 0, Math.PI * 2);
+        ctx.arc(electron.x - radius * 0.3, electron.y - radius * 0.3, radius * 0.32, 0, Math.PI * 2);
         ctx.fill();
 
-        // Hover Tag
-        if (isHovered) {
-          ctx.font = '600 13px Poppins, sans-serif';
+        // Hover Tag label
+        if (electron.isHovered) {
+          ctx.font = '700 13px Poppins, sans-serif';
           ctx.fillStyle = '#ffffff';
           ctx.textAlign = 'center';
-          ctx.fillText(electron.name, ex, ey - 15);
+          ctx.fillText(electron.name, electron.x, electron.y - 18);
         }
       });
 
@@ -175,14 +293,14 @@ const AtomStack = () => {
 
     const render = () => {
       if (isPaused) return;
-      angle += 0.01;
+      angle += 0.003;
       drawFrame(angle);
       animId = requestAnimationFrame(render);
     };
 
     render();
 
-    // Mouse & Touch Interaction Handlers
+    // Mouse & Touch Handlers
     const updatePointerPos = (clientX, clientY) => {
       const rect = canvas.getBoundingClientRect();
       const scaleX = width / rect.width;
@@ -239,7 +357,7 @@ const AtomStack = () => {
         position: 'relative',
         userSelect: 'none',
         width: '100%',
-        maxWidth: { xs: 320, sm: 380, md: 420 },
+        maxWidth: { xs: 320, sm: 380, md: 430 },
         mx: 'auto',
       }}
     >
@@ -257,12 +375,12 @@ const AtomStack = () => {
       <Typography
         variant="caption"
         sx={{
-          mt: 0.5,
+          mt: 1,
           fontFamily: "'JetBrains Mono', monospace",
-          fontSize: { xs: '0.68rem', sm: '0.72rem' },
-          letterSpacing: '0.14em',
+          fontSize: { xs: '0.68rem', sm: '0.74rem' },
+          letterSpacing: '0.22em',
           textTransform: 'uppercase',
-          color: hoveredTech ? '#22d3ee' : 'rgba(255, 255, 255, 0.45)',
+          color: hoveredTech ? '#22d3ee' : 'rgba(255, 255, 255, 0.72)',
           transition: 'color 0.2s ease',
           fontWeight: 600,
           textAlign: 'center',

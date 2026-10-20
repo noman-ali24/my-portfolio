@@ -9,7 +9,7 @@ import DownloadIcon from '@mui/icons-material/Download';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import AtomStack from './AtomStack';
 import profileImage from '../assets/486203702_1883682939041971_2560599721687666200_n.jpg';
-import cvFile from '../assets/Noman.Ali.cv.pdf';
+import cvFile from '../assets/Muhammad-Noman-Ali.pdf';
 
 const ROLES = [
   'React Native Developer.',
@@ -26,33 +26,38 @@ const Hero = () => {
 
   useEffect(() => {
     const currentRole = ROLES[roleIndex];
-    const typingSpeed = isDeleting ? 40 : 80;
+    let timeout;
 
-    const timer = setTimeout(() => {
-      if (!isDeleting) {
-        if (displayedText.length < currentRole.length) {
-          setDisplayedText(currentRole.slice(0, displayedText.length + 1));
-        } else {
-          // Pause at full word
-          setTimeout(() => setIsDeleting(true), 2000);
-        }
-      } else {
-        if (displayedText.length > 0) {
-          setDisplayedText(currentRole.slice(0, displayedText.length - 1));
-        } else {
-          setIsDeleting(false);
-          setRoleIndex((prev) => (prev + 1) % ROLES.length);
-        }
-      }
-    }, typingSpeed);
+    if (!isDeleting && displayedText === currentRole) {
+      // Full word completed: pause for 2.6 seconds so it can be comfortably read
+      timeout = setTimeout(() => {
+        setIsDeleting(true);
+      }, 2600);
+    } else if (isDeleting && displayedText === '') {
+      // Word cleared: pause 450ms before typing the next role
+      timeout = setTimeout(() => {
+        setIsDeleting(false);
+        setRoleIndex((prev) => (prev + 1) % ROLES.length);
+      }, 450);
+    } else {
+      // Typing pace: 110ms per char (calm & natural), Deleting: 55ms per char
+      const speed = isDeleting ? 55 : 110;
+      timeout = setTimeout(() => {
+        setDisplayedText((prev) =>
+          isDeleting
+            ? currentRole.substring(0, prev.length - 1)
+            : currentRole.substring(0, prev.length + 1)
+        );
+      }, speed);
+    }
 
-    return () => clearTimeout(timer);
+    return () => clearTimeout(timeout);
   }, [displayedText, isDeleting, roleIndex]);
 
   const handleDownloadCV = () => {
     const link = document.createElement('a');
     link.href = cvFile;
-    link.download = 'Noman.Ali.cv.pdf';
+    link.download = 'Muhammad-Noman-Ali.pdf';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -75,25 +80,50 @@ const Hero = () => {
       id="home"
       sx={{
         position: 'relative',
-        pt: { xs: 12, sm: 14, md: 16 },
+        pt: { xs: 10, sm: 12, md: 16 },
         pb: { xs: 6, md: 8 },
         overflow: 'hidden',
       }}
     >
       <Container maxWidth="lg" sx={{ px: { xs: 2.5, sm: 4, md: 5 } }}>
-        {/* Hero Grid: Left Content & Right 3D Atom */}
+        {/* Hero Grid: On Mobile (Image 3), AtomStack is at TOP (order 1), Content is below (order 2) */}
         <Box
           sx={{
             display: 'grid',
             gridTemplateColumns: { xs: '1fr', md: '1.2fr 0.9fr' },
-            gap: { xs: 5, md: 4 },
+            gap: { xs: 4, sm: 5, md: 4 },
             alignItems: 'center',
             minHeight: { md: '520px' },
           }}
         >
-          {/* Left Column */}
-          <Box className="animate-fade-in-up" sx={{ zIndex: 1 }}>
-            {/* Top Pill: Avatar + Status */}
+          {/* 3D Atom Orbiting Stack: order 1 on mobile (xs), order 2 on desktop (md) */}
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              position: 'relative',
+              width: '100%',
+              order: { xs: 1, md: 2 },
+              mb: { xs: 1, md: 0 },
+            }}
+          >
+            <AtomStack />
+          </Box>
+
+          {/* Left Column (Content): order 2 on mobile (xs), order 1 on desktop (md) */}
+          <Box
+            className="animate-fade-in-up"
+            sx={{
+              zIndex: 1,
+              order: { xs: 2, md: 1 },
+              textAlign: { xs: 'center', md: 'left' },
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: { xs: 'center', md: 'flex-start' },
+            }}
+          >
+            {/* Top Pill: Avatar + Status (matching Image 3) */}
             <Box
               sx={{
                 display: 'inline-flex',
@@ -104,7 +134,7 @@ const Hero = () => {
                 backgroundColor: 'rgba(255, 255, 255, 0.04)',
                 border: '1px solid rgba(255, 255, 255, 0.1)',
                 backdropFilter: 'blur(10px)',
-                mb: 3,
+                mb: 2.5,
               }}
             >
               <Box sx={{ position: 'relative' }}>
@@ -149,16 +179,17 @@ const Hero = () => {
               </Box>
             </Box>
 
-            {/* Main Heading */}
+            {/* Main Heading: Hi, I'm Noman Ali */}
             <Typography
               variant="h1"
               sx={{
                 fontWeight: 900,
-                fontSize: { xs: '2.15rem', sm: '3.25rem', md: '4.25rem' },
+                fontSize: { xs: '2.3rem', sm: '3.25rem', md: '4.25rem' },
                 lineHeight: 1.12,
                 color: '#ffffff',
                 letterSpacing: '-0.03em',
                 mb: 1.5,
+                textAlign: { xs: 'center', md: 'left' },
               }}
             >
               Hi, I'm <span className="gradient-text">Noman Ali</span>
@@ -174,7 +205,9 @@ const Hero = () => {
                 mb: 2.5,
                 display: 'flex',
                 alignItems: 'center',
+                justifyContent: { xs: 'center', md: 'flex-start' },
                 flexWrap: 'wrap',
+                textAlign: { xs: 'center', md: 'left' },
               }}
             >
               <Box component="span" sx={{ mr: 1, color: '#e2e8f0' }}>
@@ -186,7 +219,7 @@ const Hero = () => {
               <span className="typewriter-cursor">|</span>
             </Typography>
 
-            {/* Bio Description */}
+            {/* Bio Description (Exact 1-year professional experience bio) */}
             <Typography
               variant="body1"
               sx={{
@@ -195,13 +228,24 @@ const Hero = () => {
                 lineHeight: 1.7,
                 maxWidth: 580,
                 mb: 3.5,
+                textAlign: { xs: 'center', md: 'left' },
               }}
             >
               Full-Stack React Native Developer with 1 year of professional experience building user-friendly mobile and web applications. Skilled in developing responsive frontends with React Native and React.js, and building backend services and REST APIs using Node.js, Express.js, and MongoDB. Passionate about creating scalable, efficient, and high-quality end-to-end solutions.
             </Typography>
 
-            {/* Action Buttons */}
-            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2, mb: 3.5, alignItems: 'center' }}>
+            {/* Action Buttons (Download CV + View Work) */}
+            <Box
+              sx={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                gap: 2,
+                mb: 3.5,
+                alignItems: 'center',
+                justifyContent: { xs: 'center', md: 'flex-start' },
+                width: '100%',
+              }}
+            >
               <Button
                 onClick={handleDownloadCV}
                 startIcon={<DownloadIcon />}
@@ -231,8 +275,16 @@ const Hero = () => {
               </Button>
             </Box>
 
-            {/* Social Links Row */}
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+            {/* Social Links Row (Matching Image 3) */}
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: { xs: 'center', md: 'flex-start' },
+                gap: 1.5,
+                width: '100%',
+              }}
+            >
               {[
                 {
                   icon: <EmailIcon fontSize="small" />,
@@ -291,19 +343,6 @@ const Hero = () => {
                 </IconButton>
               ))}
             </Box>
-          </Box>
-
-          {/* Right Column: 3D Atom Orbiting Stack */}
-          <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              position: 'relative',
-              width: '100%',
-            }}
-          >
-            <AtomStack />
           </Box>
         </Box>
 

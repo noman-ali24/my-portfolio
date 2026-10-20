@@ -24,7 +24,7 @@ import FolderIcon from '@mui/icons-material/Folder';
 import EmailIcon from '@mui/icons-material/Email';
 import DownloadIcon from '@mui/icons-material/Download';
 import profileImage from '../assets/486203702_1883682939041971_2560599721687666200_n.jpg';
-import cvFile from '../assets/Noman.Ali.cv.pdf';
+import cvFile from '../assets/Muhammad-Noman-Ali.pdf';
 
 const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -52,7 +52,7 @@ const Header = () => {
   const handleDownloadCV = () => {
     const link = document.createElement('a');
     link.href = cvFile;
-    link.download = 'Noman.Ali.cv.pdf';
+    link.download = 'Muhammad-Noman-Ali.pdf';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -167,7 +167,7 @@ const Header = () => {
             textTransform: 'none',
           }}
         >
-          Résumé
+          Download CV
         </Button>
       </Box>
     </Box>
@@ -301,20 +301,21 @@ const Header = () => {
             })}
           </Box>
 
-          {/* Right Action: Résumé Button (Desktop) & Hamburger (Mobile) */}
+          {/* Right Action: Download CV Button (Desktop) & Hamburger (Mobile) */}
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
             <Button
               onClick={handleDownloadCV}
+              startIcon={<DownloadIcon />}
               className="btn-primary-gradient"
               sx={{
                 display: { xs: 'none', sm: 'inline-flex' },
-                px: 3,
+                px: 2.5,
                 py: 0.8,
                 fontSize: '0.85rem',
                 textTransform: 'none',
               }}
             >
-              Résumé
+              Download CV
             </Button>
 
             <IconButton
