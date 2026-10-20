@@ -9,6 +9,7 @@ import {
   Dialog,
   DialogContent,
   IconButton,
+  Tooltip,
 } from '@mui/material';
 import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded';
 import GitHubIcon from '@mui/icons-material/GitHub';
@@ -17,6 +18,7 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import LaunchIcon from '@mui/icons-material/Launch';
+import StarIcon from '@mui/icons-material/Star';
 import SectionHeader from './SectionHeader';
 
 // Import videos
@@ -230,16 +232,12 @@ const Projects = ({ isFullPage = false }) => {
     return true;
   });
 
-  const gridProjects = isFullPage
-    ? filteredProjects
-    : filteredProjects;
-
   return (
     <Box id="projects" sx={{ py: { xs: 8, md: 12 }, position: 'relative' }}>
       <Container maxWidth="lg" sx={{ px: { xs: 2.5, sm: 4, md: 5 } }}>
         <SectionHeader
           eyebrow="SELECTED WORK"
-          title={isFullPage ? "Portfolio Projects" : "Featured Projects"}
+          title={isFullPage ? 'Portfolio Projects' : 'Featured Projects'}
           subtitle="Shipped applications across mobile and web — click or hover a card to preview."
         />
 
@@ -284,7 +282,7 @@ const Projects = ({ isFullPage = false }) => {
           })}
         </Box>
 
-        {/* Projects Grid matching Reference 3-column Layout */}
+        {/* Projects Grid: 3-column on Desktop, 2 on Tablet, 1 on Mobile */}
         <Box
           sx={{
             display: 'grid',
@@ -296,7 +294,7 @@ const Projects = ({ isFullPage = false }) => {
             gap: 3.5,
           }}
         >
-          {gridProjects.map((project) => {
+          {filteredProjects.map((project) => {
             const hasMultipleImages = project.images && project.images.length > 1;
             const currentImgIdx = cardImageIndices[project.id] || 0;
             const displayImage = hasMultipleImages ? project.images[currentImgIdx] : project.image;
@@ -311,6 +309,12 @@ const Projects = ({ isFullPage = false }) => {
                   display: 'flex',
                   flexDirection: 'column',
                   height: '100%',
+                  border: project.isFeatured
+                    ? '1px solid rgba(34, 211, 238, 0.35)'
+                    : '1px solid rgba(255, 255, 255, 0.08)',
+                  boxShadow: project.isFeatured
+                    ? '0 0 30px -10px rgba(34, 211, 238, 0.25)'
+                    : 'none',
                 }}
               >
                 {/* Media Preview Container */}
@@ -318,55 +322,166 @@ const Projects = ({ isFullPage = false }) => {
                   sx={{
                     position: 'relative',
                     width: '100%',
-                    height: 230,
+                    height: 235,
                     backgroundColor: '#070914',
                     display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
+                    flexDirection: 'column',
                     overflow: 'hidden',
-                    p: project.deviceType === 'mobile' ? 2 : 0,
                     cursor: 'pointer',
                   }}
                   onClick={() => handleOpenPreview(project)}
                 >
-                  {/* Category Badge on top left */}
-                  <Chip
-                    label={project.badge}
-                    size="small"
+                  {/* Category & Featured Badge overlay */}
+                  <Box
                     sx={{
                       position: 'absolute',
-                      top: 12,
-                      left: 12,
-                      zIndex: 3,
-                      backgroundColor: 'rgba(5, 6, 15, 0.75)',
-                      backdropFilter: 'blur(8px)',
-                      color: project.deviceType === 'mobile' ? '#22d3ee' : '#a78bfa',
-                      border: `1px solid ${project.deviceType === 'mobile' ? 'rgba(34, 211, 238, 0.4)' : 'rgba(167, 139, 250, 0.4)'}`,
-                      fontFamily: "'JetBrains Mono', monospace",
-                      fontWeight: 700,
-                      fontSize: '0.68rem',
-                      letterSpacing: '0.06em',
+                      top: 10,
+                      left: 10,
+                      right: 10,
+                      zIndex: 4,
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                      pointerEvents: 'none',
                     }}
-                  />
+                  >
+                    <Chip
+                      label={project.badge}
+                      size="small"
+                      sx={{
+                        backgroundColor: 'rgba(5, 6, 15, 0.85)',
+                        backdropFilter: 'blur(8px)',
+                        color: project.deviceType === 'mobile' ? '#22d3ee' : '#a78bfa',
+                        border: `1px solid ${
+                          project.deviceType === 'mobile'
+                            ? 'rgba(34, 211, 238, 0.4)'
+                            : 'rgba(167, 139, 250, 0.4)'
+                        }`,
+                        fontFamily: "'JetBrains Mono', monospace",
+                        fontWeight: 700,
+                        fontSize: '0.66rem',
+                        letterSpacing: '0.06em',
+                      }}
+                    />
 
-                  {/* If mobile app, render phone mockup display */}
-                  {project.deviceType === 'mobile' ? (
+                    {project.isFeatured && (
+                      <Chip
+                        icon={<StarIcon sx={{ fontSize: '0.85rem !important', color: '#f59e0b' }} />}
+                        label="FEATURED"
+                        size="small"
+                        sx={{
+                          backgroundColor: 'rgba(245, 158, 11, 0.15)',
+                          backdropFilter: 'blur(8px)',
+                          color: '#fbbf24',
+                          border: '1px solid rgba(245, 158, 11, 0.4)',
+                          fontFamily: "'JetBrains Mono', monospace",
+                          fontWeight: 700,
+                          fontSize: '0.64rem',
+                          letterSpacing: '0.06em',
+                        }}
+                      />
+                    )}
+                  </Box>
+
+                  {/* Browser Mockup Header for Web Projects */}
+                  {project.deviceType === 'web' && (
                     <Box
                       sx={{
-                        width: 'auto',
-                        height: '100%',
-                        maxHeight: 200,
-                        aspectRatio: '9 / 18',
-                        borderRadius: '16px',
-                        overflow: 'hidden',
-                        border: '2px solid rgba(255, 255, 255, 0.15)',
-                        boxShadow: '0 12px 28px rgba(0,0,0,0.6)',
-                        backgroundColor: '#000',
+                        width: '100%',
+                        height: 28,
+                        backgroundColor: 'rgba(15, 18, 35, 0.95)',
+                        borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
                         display: 'flex',
                         alignItems: 'center',
-                        justifyContent: 'center',
+                        px: 1.5,
+                        gap: 0.8,
+                        flexShrink: 0,
                       }}
                     >
+                      {/* Window Dots */}
+                      <Box sx={{ display: 'flex', gap: 0.6 }}>
+                        <Box sx={{ width: 8, height: 8, borderRadius: '50%', backgroundColor: '#ef4444' }} />
+                        <Box sx={{ width: 8, height: 8, borderRadius: '50%', backgroundColor: '#f59e0b' }} />
+                        <Box sx={{ width: 8, height: 8, borderRadius: '50%', backgroundColor: '#10b981' }} />
+                      </Box>
+
+                      {/* Mockup URL Address pill */}
+                      <Box
+                        sx={{
+                          mx: 'auto',
+                          px: 1.8,
+                          py: 0.2,
+                          borderRadius: '9999px',
+                          backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                          border: '1px solid rgba(255, 255, 255, 0.08)',
+                          color: '#94a3b8',
+                          fontFamily: "'JetBrains Mono', monospace",
+                          fontSize: '0.64rem',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: 0.5,
+                        }}
+                      >
+                        🔒 {project.domain || 'localhost'}
+                      </Box>
+                    </Box>
+                  )}
+
+                  {/* Media Content Display */}
+                  <Box
+                    sx={{
+                      flexGrow: 1,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      position: 'relative',
+                      overflow: 'hidden',
+                      p: project.deviceType === 'mobile' ? 1.5 : 0,
+                    }}
+                  >
+                    {project.deviceType === 'mobile' ? (
+                      /* Phone Device Mockup Frame */
+                      <Box
+                        sx={{
+                          width: 'auto',
+                          height: '92%',
+                          maxHeight: 185,
+                          aspectRatio: '9 / 18',
+                          borderRadius: '16px',
+                          overflow: 'hidden',
+                          border: '2.5px solid rgba(255, 255, 255, 0.2)',
+                          boxShadow: '0 10px 25px rgba(0,0,0,0.7)',
+                          backgroundColor: '#000',
+                          position: 'relative',
+                        }}
+                      >
+                        {/* Speaker Notch */}
+                        <Box
+                          sx={{
+                            position: 'absolute',
+                            top: 4,
+                            left: '50%',
+                            transform: 'translateX(-50%)',
+                            width: 24,
+                            height: 3,
+                            borderRadius: '9999px',
+                            backgroundColor: 'rgba(255, 255, 255, 0.4)',
+                            zIndex: 3,
+                          }}
+                        />
+                        <Box
+                          component="img"
+                          src={displayImage}
+                          alt={project.title}
+                          sx={{
+                            width: '100%',
+                            height: '100%',
+                            objectFit: 'cover',
+                          }}
+                        />
+                      </Box>
+                    ) : (
+                      /* Web App screenshot with smooth zoom on hover */
                       <Box
                         component="img"
                         src={displayImage}
@@ -375,105 +490,94 @@ const Projects = ({ isFullPage = false }) => {
                           width: '100%',
                           height: '100%',
                           objectFit: 'cover',
+                          objectPosition: 'top',
+                          transition: 'transform 0.4s ease',
+                          '&:hover': {
+                            transform: 'scale(1.04)',
+                          },
                         }}
                       />
-                    </Box>
-                  ) : (
-                    /* Web App preview */
-                    <Box
-                      component="img"
-                      src={displayImage}
-                      alt={project.title}
-                      sx={{
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'cover',
-                        transition: 'transform 0.4s ease',
-                        '&:hover': {
-                          transform: 'scale(1.04)',
-                        },
-                      }}
-                    />
-                  )}
+                    )}
 
-                  {/* Play video overlay if video exists */}
-                  {project.video && (
-                    <Box
-                      sx={{
-                        position: 'absolute',
-                        inset: 0,
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        backgroundColor: 'rgba(5, 6, 15, 0.35)',
-                        transition: 'background-color 0.2s ease',
-                        '&:hover': {
-                          backgroundColor: 'rgba(5, 6, 15, 0.15)',
-                        },
-                      }}
-                    >
+                    {/* Play Video Overlay for projects with video */}
+                    {project.video && (
                       <Box
                         sx={{
-                          width: 46,
-                          height: 46,
-                          borderRadius: '50%',
-                          backgroundColor: 'rgba(34, 211, 238, 0.9)',
+                          position: 'absolute',
+                          inset: 0,
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'center',
-                          color: '#05060f',
-                          boxShadow: '0 0 20px rgba(34, 211, 238, 0.7)',
-                          transition: 'transform 0.2s ease',
+                          backgroundColor: 'rgba(5, 6, 15, 0.35)',
+                          transition: 'background-color 0.2s ease',
                           '&:hover': {
-                            transform: 'scale(1.1)',
+                            backgroundColor: 'rgba(5, 6, 15, 0.15)',
                           },
                         }}
                       >
-                        <PlayArrowRoundedIcon sx={{ fontSize: 32 }} />
-                      </Box>
-                    </Box>
-                  )}
-
-                  {/* Multi-image indicator dots */}
-                  {hasMultipleImages && (
-                    <Box
-                      sx={{
-                        position: 'absolute',
-                        bottom: 8,
-                        left: '50%',
-                        transform: 'translateX(-50%)',
-                        display: 'flex',
-                        gap: 0.6,
-                        zIndex: 3,
-                        backgroundColor: 'rgba(5, 6, 15, 0.6)',
-                        px: 1,
-                        py: 0.3,
-                        borderRadius: '9999px',
-                      }}
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      {project.images.slice(0, 5).map((_, dotIdx) => (
                         <Box
-                          key={dotIdx}
-                          onClick={() =>
-                            setCardImageIndices((prev) => ({
-                              ...prev,
-                              [project.id]: dotIdx,
-                            }))
-                          }
                           sx={{
-                            width: currentImgIdx === dotIdx ? 14 : 5,
-                            height: 5,
-                            borderRadius: '9999px',
-                            backgroundColor:
-                              currentImgIdx === dotIdx ? '#22d3ee' : 'rgba(255, 255, 255, 0.4)',
-                            cursor: 'pointer',
-                            transition: 'all 0.2s ease',
+                            width: 44,
+                            height: 44,
+                            borderRadius: '50%',
+                            backgroundColor: 'rgba(34, 211, 238, 0.9)',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            color: '#05060f',
+                            boxShadow: '0 0 20px rgba(34, 211, 238, 0.7)',
+                            transition: 'transform 0.2s ease',
+                            '&:hover': {
+                              transform: 'scale(1.1)',
+                            },
                           }}
-                        />
-                      ))}
-                    </Box>
-                  )}
+                        >
+                          <PlayArrowRoundedIcon sx={{ fontSize: 30 }} />
+                        </Box>
+                      </Box>
+                    )}
+
+                    {/* Multi-image indicator dots for WhatsApp gallery */}
+                    {hasMultipleImages && (
+                      <Box
+                        sx={{
+                          position: 'absolute',
+                          bottom: 8,
+                          left: '50%',
+                          transform: 'translateX(-50%)',
+                          display: 'flex',
+                          gap: 0.6,
+                          zIndex: 3,
+                          backgroundColor: 'rgba(5, 6, 15, 0.7)',
+                          px: 1.2,
+                          py: 0.3,
+                          borderRadius: '9999px',
+                        }}
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        {project.images.slice(0, 6).map((_, dotIdx) => (
+                          <Box
+                            key={dotIdx}
+                            onClick={() =>
+                              setCardImageIndices((prev) => ({
+                                ...prev,
+                                [project.id]: dotIdx,
+                              }))
+                            }
+                            sx={{
+                              width: currentImgIdx === dotIdx ? 12 : 5,
+                              height: 5,
+                              borderRadius: '9999px',
+                              backgroundColor:
+                                currentImgIdx === dotIdx ? '#22d3ee' : 'rgba(255, 255, 255, 0.4)',
+                              cursor: 'pointer',
+                              transition: 'all 0.2s ease',
+                            }}
+                          />
+                        ))}
+                      </Box>
+                    )}
+                  </Box>
                 </Box>
 
                 {/* Card Content Area */}
@@ -554,7 +658,7 @@ const Projects = ({ isFullPage = false }) => {
                     sx={{
                       display: 'flex',
                       alignItems: 'center',
-                      gap: 1.5,
+                      gap: 1.25,
                       pt: 2,
                       borderTop: '1px solid rgba(255, 255, 255, 0.07)',
                     }}
@@ -577,57 +681,60 @@ const Projects = ({ isFullPage = false }) => {
 
                     {/* GitHub Link */}
                     {project.githubLink && (
-                      <IconButton
-                        component="a"
-                        href={project.githubLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label="GitHub Repository"
-                        sx={{
-                          width: 38,
-                          height: 38,
-                          borderRadius: '50%',
-                          backgroundColor: 'rgba(255, 255, 255, 0.05)',
-                          border: '1px solid rgba(255, 255, 255, 0.1)',
-                          color: '#cbd5e1',
-                          transition: 'all 0.2s ease',
-                          '&:hover': {
-                            backgroundColor: 'rgba(99, 102, 241, 0.25)',
-                            borderColor: '#22d3ee',
-                            color: '#22d3ee',
-                          },
-                        }}
-                      >
-                        <GitHubIcon sx={{ fontSize: '1.1rem' }} />
-                      </IconButton>
+                      <Tooltip title={project.backendGithubLink ? 'Frontend Repository' : 'GitHub Repository'}>
+                        <IconButton
+                          component="a"
+                          href={project.githubLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`${project.title} GitHub Repository`}
+                          sx={{
+                            width: 38,
+                            height: 38,
+                            borderRadius: '50%',
+                            backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                            border: '1px solid rgba(255, 255, 255, 0.1)',
+                            color: '#cbd5e1',
+                            transition: 'all 0.2s ease',
+                            '&:hover': {
+                              backgroundColor: 'rgba(99, 102, 241, 0.25)',
+                              borderColor: '#22d3ee',
+                              color: '#22d3ee',
+                            },
+                          }}
+                        >
+                          <GitHubIcon sx={{ fontSize: '1.1rem' }} />
+                        </IconButton>
+                      </Tooltip>
                     )}
 
                     {/* Backend GitHub Link for AutoPulse */}
                     {project.backendGithubLink && (
-                      <IconButton
-                        component="a"
-                        href={project.backendGithubLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label="Backend GitHub Repository"
-                        title="Backend Repo"
-                        sx={{
-                          width: 38,
-                          height: 38,
-                          borderRadius: '50%',
-                          backgroundColor: 'rgba(255, 255, 255, 0.05)',
-                          border: '1px solid rgba(255, 255, 255, 0.1)',
-                          color: '#cbd5e1',
-                          transition: 'all 0.2s ease',
-                          '&:hover': {
-                            backgroundColor: 'rgba(99, 102, 241, 0.25)',
-                            borderColor: '#a78bfa',
-                            color: '#a78bfa',
-                          },
-                        }}
-                      >
-                        <GitHubIcon sx={{ fontSize: '1.1rem' }} />
-                      </IconButton>
+                      <Tooltip title="Backend API Repository">
+                        <IconButton
+                          component="a"
+                          href={project.backendGithubLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`${project.title} Backend API Repository`}
+                          sx={{
+                            width: 38,
+                            height: 38,
+                            borderRadius: '50%',
+                            backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                            border: '1px solid rgba(255, 255, 255, 0.1)',
+                            color: '#cbd5e1',
+                            transition: 'all 0.2s ease',
+                            '&:hover': {
+                              backgroundColor: 'rgba(99, 102, 241, 0.25)',
+                              borderColor: '#a78bfa',
+                              color: '#a78bfa',
+                            },
+                          }}
+                        >
+                          <GitHubIcon sx={{ fontSize: '1.1rem' }} />
+                        </IconButton>
+                      </Tooltip>
                     )}
                   </Box>
                 </Box>
@@ -692,7 +799,11 @@ const Projects = ({ isFullPage = false }) => {
               {activeProject?.subtitle}
             </Typography>
           </Box>
-          <IconButton onClick={handleCloseDialog} sx={{ color: '#94a3b8', '&:hover': { color: '#ffffff' } }}>
+          <IconButton
+            onClick={handleCloseDialog}
+            aria-label="Close dialog"
+            sx={{ color: '#94a3b8', '&:hover': { color: '#ffffff' } }}
+          >
             <CloseIcon />
           </IconButton>
         </Box>
@@ -718,7 +829,7 @@ const Projects = ({ isFullPage = false }) => {
               <Box
                 component="img"
                 src={selectedImages[currentImageIndex]}
-                alt="Project Preview"
+                alt={`${activeProject?.title || 'Project'} preview ${currentImageIndex + 1}`}
                 sx={{
                   maxWidth: '100%',
                   maxHeight: '68vh',
@@ -732,10 +843,11 @@ const Projects = ({ isFullPage = false }) => {
                 <>
                   <IconButton
                     onClick={handlePreviousImage}
+                    aria-label="Previous image"
                     sx={{
                       position: 'absolute',
                       left: 8,
-                      backgroundColor: 'rgba(5, 6, 15, 0.7)',
+                      backgroundColor: 'rgba(5, 6, 15, 0.75)',
                       color: '#ffffff',
                       '&:hover': { backgroundColor: 'rgba(99, 102, 241, 0.8)' },
                     }}
@@ -744,10 +856,11 @@ const Projects = ({ isFullPage = false }) => {
                   </IconButton>
                   <IconButton
                     onClick={handleNextImage}
+                    aria-label="Next image"
                     sx={{
                       position: 'absolute',
                       right: 8,
-                      backgroundColor: 'rgba(5, 6, 15, 0.7)',
+                      backgroundColor: 'rgba(5, 6, 15, 0.75)',
                       color: '#ffffff',
                       '&:hover': { backgroundColor: 'rgba(99, 102, 241, 0.8)' },
                     }}
@@ -758,7 +871,7 @@ const Projects = ({ isFullPage = false }) => {
                     sx={{
                       position: 'absolute',
                       bottom: 12,
-                      backgroundColor: 'rgba(5, 6, 15, 0.8)',
+                      backgroundColor: 'rgba(5, 6, 15, 0.85)',
                       px: 2,
                       py: 0.5,
                       borderRadius: '9999px',

@@ -92,7 +92,7 @@ const Hero = () => {
           }}
         >
           {/* Left Column */}
-          <Box sx={{ zIndex: 1 }}>
+          <Box className="animate-fade-in-up" sx={{ zIndex: 1 }}>
             {/* Top Pill: Avatar + Status */}
             <Box
               sx={{
@@ -154,8 +154,8 @@ const Hero = () => {
               variant="h1"
               sx={{
                 fontWeight: 900,
-                fontSize: { xs: '2.5rem', sm: '3.5rem', md: '4.25rem' },
-                lineHeight: 1.1,
+                fontSize: { xs: '2.15rem', sm: '3.25rem', md: '4.25rem' },
+                lineHeight: 1.12,
                 color: '#ffffff',
                 letterSpacing: '-0.03em',
                 mb: 1.5,
@@ -312,7 +312,7 @@ const Hero = () => {
           sx={{
             display: 'grid',
             gridTemplateColumns: { xs: 'repeat(2, 1fr)', md: 'repeat(4, 1fr)' },
-            gap: { xs: 2, sm: 2.5 },
+            gap: { xs: 1.5, sm: 2.5 },
             mt: { xs: 6, md: 8 },
           }}
         >
@@ -321,7 +321,7 @@ const Hero = () => {
               key={idx}
               className="glass-panel glass-panel-hover"
               sx={{
-                p: { xs: 2.5, sm: 3 },
+                p: { xs: 2, sm: 3 },
                 borderRadius: '16px',
                 textAlign: 'center',
                 display: 'flex',
@@ -335,10 +335,10 @@ const Hero = () => {
                 sx={{
                   fontFamily: "'Montserrat', sans-serif",
                   fontWeight: 800,
-                  fontSize: { xs: '1.75rem', sm: '2.25rem', md: '2.5rem' },
+                  fontSize: { xs: '1.6rem', sm: '2.25rem', md: '2.5rem' },
                   color: '#22d3ee',
                   lineHeight: 1.1,
-                  mb: 0.75,
+                  mb: 0.5,
                 }}
               >
                 {stat.number}
@@ -347,9 +347,9 @@ const Hero = () => {
                 variant="caption"
                 sx={{
                   fontFamily: "'JetBrains Mono', monospace",
-                  fontSize: { xs: '0.65rem', sm: '0.72rem' },
+                  fontSize: { xs: '0.62rem', sm: '0.72rem' },
                   fontWeight: 600,
-                  letterSpacing: '0.08em',
+                  letterSpacing: '0.06em',
                   textTransform: 'uppercase',
                   color: '#94a3b8',
                 }}

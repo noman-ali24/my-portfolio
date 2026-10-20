@@ -30,9 +30,24 @@ const Contact = ({ showHeader = true }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
+      setToast({
+        open: true,
+        message: 'Please complete your name, email, and message before sending.',
+        severity: 'warning',
+      });
+      return;
+    }
+
+    const subject = encodeURIComponent(`Portfolio Inquiry from ${formData.name}`);
+    const body = encodeURIComponent(
+      `Hi Noman,\n\nName: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
+    );
+    window.location.href = `mailto:nomanali01241@gmail.com?subject=${subject}&body=${body}`;
+
     setToast({
       open: true,
-      message: 'Thank you for your message! I will get back to you soon.',
+      message: 'Opening your email app to send your message directly to Noman Ali...',
       severity: 'success',
     });
     setFormData({ name: '', email: '', message: '' });
