@@ -18,15 +18,20 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import LaunchIcon from '@mui/icons-material/Launch';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import WorkOutlineIcon from '@mui/icons-material/WorkOutline';
+import CheckCircleRoundedIcon from '@mui/icons-material/CheckCircleRounded';
 import SectionHeader from './SectionHeader';
 
 // Import videos
 import autopulseVideo from '../assets/autopulse_video.mp4';
 import adminVideo from '../assets/Screen Recording 2026-01-24 232258.mp4';
 import websiteVideo from '../assets/Screen Recording 2026-01-24 231929.mp4';
+import stamptVideo from '../assets/stampt_demo.mp4';
 
 // Import Images
 import autopulseImg from '../assets/autopulse.png';
+import stamptImg from '../assets/stampt_cover.jpg';
 const whatsapp1 = require('../assets/whatsapp (1).jpeg');
 const whatsapp2 = require('../assets/whatsapp (2).jpeg');
 const whatsapp3 = require('../assets/whatsapp (3).jpeg');
@@ -75,6 +80,48 @@ export const ALL_PROJECTS = [
     backendGithubLink: 'https://github.com/noman-ali24/sign-in-sigup-Backend',
     description:
       'A production-grade mobile app for vehicle servicing and customer management with secure JWT authentication, real-time booking, and end-to-end REST APIs.',
+  },
+  {
+    id: 'stampt',
+    isFeatured: true,
+    isPrivate: true,
+    title: 'Stampt — Digital Loyalty & Rewards App',
+    subtitle: 'Mobile App · Professional / Company Project',
+    badge: 'MOBILE APP',
+    category: 'Mobile App',
+    deviceType: 'mobile',
+    image: stamptImg,
+    imageType: 'video',
+    video: stamptVideo,
+    skills: [
+      'React Native',
+      'TypeScript',
+      'Redux',
+      'Socket.IO',
+      'REST APIs',
+      'Camera Integration',
+      'React Native Animations',
+    ],
+    description:
+      'A digital loyalty platform replacing paper punch cards — scan merchant QR codes, collect real-time stamps, discover nearby spots, and redeem rewards.',
+    longDescription: [
+      'Stampt is a modern digital loyalty and rewards application designed to replace traditional paper punch cards with a seamless mobile experience.',
+      'Customers can scan merchant QR codes to collect digital stamps in real time, discover nearby participating businesses, track their loyalty history, and redeem rewards through an intuitive and engaging interface.',
+    ],
+    features: [
+      'QR code scanning and digital stamp collection',
+      'Real-time stamp updates and synchronization',
+      'Nearby merchant discovery',
+      'Loyalty history and reward tracking',
+      'Reward redemption functionality',
+      'Smooth animations and responsive user interface',
+      'Camera integration and API connectivity',
+    ],
+    role: 'React Native Full Stack Developer',
+    roleDescription:
+      'Focused on developing responsive mobile features, integrating backend APIs, implementing real-time functionality, managing application state, and optimizing UI animations and performance.',
+    projectType: 'Professional / Company Project',
+    sourceCode: 'Private — Company-owned',
   },
   {
     id: 'whatsapp-ui',
@@ -154,6 +201,97 @@ export const ALL_PROJECTS = [
       'An interactive digital arithmetic calculator with standard computations, keyboard event listeners, and an ergonomic dark interface.',
   },
 ];
+
+const detailLabelSx = {
+  fontFamily: "'JetBrains Mono', monospace",
+  fontSize: '0.7rem',
+  fontWeight: 700,
+  letterSpacing: '0.1em',
+  color: '#22d3ee',
+  mb: 1,
+  mt: 2.5,
+};
+
+const metaChipSx = {
+  backgroundColor: 'rgba(255, 255, 255, 0.05)',
+  border: '1px solid rgba(255, 255, 255, 0.12)',
+  color: '#cbd5e1',
+  fontSize: '0.74rem',
+  fontWeight: 500,
+  '& .MuiChip-icon': { color: '#22d3ee', fontSize: '0.95rem' },
+};
+
+// Details panel shown beside the demo video for projects that define `features`
+const ProjectDetails = ({ project }) => (
+  <Box sx={{ textAlign: 'left' }}>
+    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, mb: 2 }}>
+      <Chip icon={<WorkOutlineIcon />} label={project.projectType} size="small" sx={metaChipSx} />
+      <Chip
+        icon={<LockOutlinedIcon />}
+        label={`Source: ${project.sourceCode}`}
+        size="small"
+        sx={{
+          ...metaChipSx,
+          borderColor: 'rgba(167, 139, 250, 0.35)',
+          '& .MuiChip-icon': { color: '#a78bfa', fontSize: '0.95rem' },
+        }}
+      />
+    </Box>
+
+    {project.longDescription.map((para, idx) => (
+      <Typography
+        key={idx}
+        variant="body2"
+        sx={{ color: '#94a3b8', fontSize: '0.88rem', lineHeight: 1.7, mb: 1.25 }}
+      >
+        {para}
+      </Typography>
+    ))}
+
+    <Typography sx={detailLabelSx}>KEY FEATURES</Typography>
+    <Box component="ul" sx={{ listStyle: 'none', p: 0, m: 0, display: 'grid', gap: 0.9 }}>
+      {project.features.map((feature) => (
+        <Box
+          component="li"
+          key={feature}
+          sx={{ display: 'flex', alignItems: 'flex-start', gap: 1, color: '#e2e8f0', fontSize: '0.86rem', lineHeight: 1.5 }}
+        >
+          <CheckCircleRoundedIcon sx={{ fontSize: '1rem', color: '#22d3ee', mt: '2px', flexShrink: 0 }} />
+          {feature}
+        </Box>
+      ))}
+    </Box>
+
+    <Typography sx={detailLabelSx}>MY ROLE</Typography>
+    <Typography sx={{ color: '#ffffff', fontWeight: 600, fontSize: '0.92rem', mb: 0.5 }}>
+      {project.role}
+    </Typography>
+    <Typography variant="body2" sx={{ color: '#94a3b8', fontSize: '0.86rem', lineHeight: 1.65 }}>
+      {project.roleDescription}
+    </Typography>
+
+    <Typography sx={detailLabelSx}>TECHNOLOGIES</Typography>
+    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.75 }}>
+      {project.skills.map((skill) => (
+        <Box
+          key={skill}
+          sx={{
+            px: 1.25,
+            py: 0.35,
+            borderRadius: '9999px',
+            backgroundColor: 'rgba(34, 211, 238, 0.08)',
+            border: '1px solid rgba(34, 211, 238, 0.25)',
+            color: '#cbd5e1',
+            fontSize: '0.74rem',
+            fontWeight: 500,
+          }}
+        >
+          {skill}
+        </Box>
+      ))}
+    </Box>
+  </Box>
+);
 
 const Projects = ({ isFullPage = false }) => {
   const [filter, setFilter] = useState('All');
@@ -359,6 +497,29 @@ const Projects = ({ isFullPage = false }) => {
                     />
                   </Box>
 
+                  {/* Top-Right Private / Company badge */}
+                  {project.isPrivate && (
+                    <Box sx={{ position: 'absolute', top: 14, right: 14, zIndex: 4, pointerEvents: 'none' }}>
+                      <Chip
+                        icon={<LockOutlinedIcon />}
+                        label="COMPANY"
+                        size="small"
+                        sx={{
+                          backgroundColor: 'rgba(167, 139, 250, 0.14)',
+                          backdropFilter: 'blur(8px)',
+                          color: '#a78bfa',
+                          border: '1px solid rgba(167, 139, 250, 0.35)',
+                          fontFamily: "'JetBrains Mono', monospace",
+                          fontWeight: 700,
+                          fontSize: '0.62rem',
+                          letterSpacing: '0.06em',
+                          height: 24,
+                          '& .MuiChip-icon': { color: '#a78bfa', fontSize: '0.8rem', ml: '6px' },
+                        }}
+                      />
+                    </Box>
+                  )}
+
                   {/* Media Content Display */}
                   <Box
                     sx={{
@@ -496,6 +657,26 @@ const Projects = ({ isFullPage = false }) => {
                       >
                         {project.video ? 'Watch Demo' : 'View Gallery'}
                       </Button>
+
+                      {project.isPrivate && (
+                        <Tooltip title={`Source code: ${project.sourceCode}`}>
+                          <Box
+                            sx={{
+                              width: 36,
+                              height: 36,
+                              borderRadius: '50%',
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                              border: '1px solid rgba(255, 255, 255, 0.2)',
+                              color: '#a78bfa',
+                            }}
+                          >
+                            <LockOutlinedIcon sx={{ fontSize: '1.05rem' }} />
+                          </Box>
+                        </Tooltip>
+                      )}
 
                       {project.githubLink && (
                         <Tooltip title={project.backendGithubLink ? 'Frontend Code' : 'GitHub Code'}>
@@ -774,7 +955,49 @@ const Projects = ({ isFullPage = false }) => {
         </Box>
 
         <DialogContent sx={{ p: 2, textAlign: 'center', position: 'relative' }}>
-          {selectedVideo ? (
+          {selectedVideo && activeProject?.features ? (
+            <Box
+              sx={{
+                display: 'grid',
+                gridTemplateColumns: { xs: '1fr', md: 'minmax(0, 0.85fr) minmax(0, 1.15fr)' },
+                gap: { xs: 2.5, md: 3.5 },
+                alignItems: 'start',
+                p: { xs: 0, md: 1 },
+              }}
+            >
+              <Box
+                sx={{
+                  width: '100%',
+                  borderRadius: '16px',
+                  overflow: 'hidden',
+                  backgroundColor: '#000',
+                  border: '1px solid rgba(255, 255, 255, 0.1)',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  position: { md: 'sticky' },
+                  top: { md: 0 },
+                }}
+              >
+                <Box
+                  component="video"
+                  src={selectedVideo}
+                  poster={activeProject.image}
+                  controls
+                  autoPlay
+                  muted
+                  playsInline
+                  sx={{
+                    width: '100%',
+                    maxHeight: { xs: '60vh', md: '72vh' },
+                    objectFit: 'contain',
+                    display: 'block',
+                    backgroundColor: '#000',
+                  }}
+                />
+              </Box>
+              <ProjectDetails project={activeProject} />
+            </Box>
+          ) : selectedVideo ? (
             <Box sx={{ width: '100%', maxHeight: '70vh', borderRadius: '12px', overflow: 'hidden' }}>
               <video
                 src={selectedVideo}

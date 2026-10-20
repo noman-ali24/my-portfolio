@@ -50,9 +50,12 @@ const Header = () => {
   ];
 
   const handleDownloadCV = () => {
+    const fileUrl = cvFile || `${process.env.PUBLIC_URL}/Muhammad-Noman-Ali.pdf`;
     const link = document.createElement('a');
-    link.href = cvFile;
-    link.download = 'Muhammad-Noman-Ali.pdf';
+    link.href = fileUrl;
+    link.setAttribute('download', 'Muhammad-Noman-Ali.pdf');
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
